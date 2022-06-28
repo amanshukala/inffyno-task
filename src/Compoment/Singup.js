@@ -7,10 +7,11 @@ const Singup = () => {
   const [values, setValues] = useState({
     username: "",
     email: "",
-    birthday: "",
+
     password: "",
     confirmPassword: "",
   });
+  
 
   const inputs = [
     {
@@ -22,7 +23,7 @@ const Singup = () => {
         "Username should be 3-16 characters and shouldn't include any special character!",
       label: "Username",
       pattern: "^[A-Za-z0-9]{3,16}$",
-      required: true,
+    
     },
     {
       id: 2,
@@ -31,7 +32,7 @@ const Singup = () => {
       placeholder: "Email",
       errorMessage: "It should be a valid email address!",
       label: "Email",
-      required: true,
+      
     },
     
     {
@@ -43,7 +44,7 @@ const Singup = () => {
         "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
       label: "Password",
       pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
-      required: true,
+      
     },
     {
       id: 4,
@@ -53,14 +54,24 @@ const Singup = () => {
       errorMessage: "Passwords don't match!",
       label: "Confirm Password",
       pattern: values.password,
-      required: true,
+      
     },
   ];
 
+
+  let formisValid =false;
+  if(values.username && values.email && values.password && values.confirmPassword){
+    formisValid=true;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+
     alert(values.username +values.email +values.password)
   };
+
+
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -80,8 +91,8 @@ const Singup = () => {
         ))}
       
           
-            <button>SingUp</button>
-            <Link to ="/">
+            <button disabled={!formisValid}>SingUp</button>
+            <Link to ="/" >
             <p className="text-[22px] mb-[22px] text-center hover:border-b-2 border-red-800" > I am already user</p>
             
   

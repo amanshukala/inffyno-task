@@ -47,6 +47,11 @@ const Login = () => {
     },
   ];
 
+  let formisValid =false;
+  if(values.email && values.password && values.confirmPassword){
+    formisValid=true;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(values.username +values.email +values.password)
@@ -69,7 +74,7 @@ const Login = () => {
             onChange={onChange}
           />
         ))}
-        <button>Submit</button>
+        <button disabled ={!formisValid}>Submit</button>
         
           <Link to="/singup">
           <p className="text-[22px] mb-[22px] text-center hover:border-b-2 border-red-800 ">I'm not user</p>
