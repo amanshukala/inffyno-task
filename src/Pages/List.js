@@ -7,7 +7,7 @@ import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import AlertDialog from "../AlertDialog";
+import AlertDialog from "./AlertDialog";
 const useStyles = makeStyles({
     stuListColor: {
         backgroundColor: orange[400],
