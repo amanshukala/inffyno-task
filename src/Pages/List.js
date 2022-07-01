@@ -4,10 +4,14 @@ import { orange } from '@material-ui/core/colors';
 import EditOffSharpIcon from '@mui/icons-material/EditOffSharp';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp';
-import { Link } from "react-router-dom";
+
+
+
+import { Link } from "react-router-dom"
 import axios from "axios";
 import { useState, useEffect } from "react";
 import AlertDialog from "./AlertDialog";
+import Progressbar from "./Progressbar";
 const useStyles = makeStyles({
     stuListColor: {
         backgroundColor: orange[400],
@@ -47,10 +51,15 @@ const List = () => {
 
     const handleDelete = async id => {
         await axios.delete(`https://reqres.in/api/users/${id}`);
+        
         var newemployee = employees.filter((item) => {
-            // console.log(item);
+         
+          
             return item.id !== id;
+                    
         })
+       
+              
         setEmployees(newemployee);
     }
 
@@ -78,6 +87,9 @@ return (
             {isopen && <AlertDialog open_Dialouge={isopen} handleClose={DailougeHander} />}
             <Typography variant="h4">Employee List</Typography>
         </Box>
+    
+           
+        
         <TableContainer component={Paper}>
             <Table>
                 <TableHead>
@@ -116,10 +128,12 @@ return (
 
                                                 <Link to={`/edit/${item.id}`}><EditOffSharpIcon /></Link></IconButton>
                                         </Tooltip>
+                                        
                                         <Tooltip title="Delete">
-
+                                            
                                             <IconButton onClick={() => { setIsopen(true) ; setDel_id(item.id)}} ><  DeleteOutlineSharpIcon /></IconButton>
                                         </Tooltip>
+                                      
                                     </TableCell>
                                 </TableRow>
                             )
