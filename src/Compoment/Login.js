@@ -3,29 +3,31 @@ import { Link } from "react-router-dom";
 import "../App.css"
 import FormInput from "./FormInput"
 
-const Login = () => {
+const Login = (props) => {
   const [values, setValues] = useState({
-    username: "",
+ 
     email: "",
-    birthday: "",
     password: "",
-    confirmPassword: "",
+  
+
   });
+
+  const [form_invalid ,setForm_invalid] =useState(false)
 
   const inputs = [
 
     {
-      id: 2,
+      id: 1,
       name: "email",
       type: "email",
       placeholder: "Email",
       errorMessage: "It should be a valid email address!",
       label: "Email",
-      required: true,
+      
     },
    
     {
-      id: 4,
+      id: 2,
       name: "password",
       type: "password",
       placeholder: "Password",
@@ -33,38 +35,42 @@ const Login = () => {
         "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
       label: "Password",
       pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
-      required: true,
+    
     },
-    {
-      id: 5,
-      name: "confirmPassword",
-      type: "password",
-      placeholder: "Confirm Password",
-      errorMessage: "Passwords don't match!",
-      label: "Confirm Password",
-      pattern: values.password,
-      required: true,
-    },
+   
   ];
 
-  let formisValid =false;
-  if(values.email && values.password && values.confirmPassword){
-    formisValid=true;
-  }
+ 
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(values.username +values.email +values.password)
+    console.log(values)
 
-  };
+    if(values.email.trim()=== "" || values.password ===""){
+      setForm_invalid(true)
+    }else {
+      setForm_invalid(false)
+    }
+    console.log(form_invalid);
+  
+    setValues({
+    
+      email: "",
+    
+      password: "",
+    
+  
+    })
+  }  
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   return (
-    <div className="app  anima">
-      <form onSubmit={handleSubmit}>
+    <div className="app ">
+     <form onSubmit={handleSubmit }>
         <h1>Login</h1>
         {inputs.map((input) => (
           <FormInput
@@ -74,9 +80,11 @@ const Login = () => {
             onChange={onChange}
           />
         ))}
-        <button disabled ={!formisValid}>Submit</button>
+        {form_invalid ? <p>Please enter valid email and password</p>: ""}
+        <button  >Submit</button>
+
         
-          <Link to="/singup">
+          <Link to="/sing_up">
           <p className="text-[22px] mb-[22px] text-center hover:border-b-2 border-red-800 ">I'm not user</p>
           </Link>
         

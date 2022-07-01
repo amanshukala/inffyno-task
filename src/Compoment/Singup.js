@@ -69,6 +69,13 @@ const Singup = () => {
 
 
     alert(values.username +values.email +values.password)
+    setValues({
+      username: "",
+      email: "",
+  
+      password: "",
+      confirmPassword: "",
+    })
   };
 
 

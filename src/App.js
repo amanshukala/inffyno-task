@@ -4,15 +4,20 @@ import {BrowserRouter ,Routes ,Route} from 'react-router-dom';
 import Login from './Compoment/Login';
 
 import Singup from './Compoment/Singup';
+import { useState } from 'react';
 
 const App = () => {
+
+  const [showmodel,setShowmodel ] =useState(true)
+  
+
   return (
     <BrowserRouter>
-      {/* <Header /> */}
+    
       <Routes>
 
-        <Route path='/' element={< Login/>}/>
-        <Route path='/singup' element={<Singup/>}/>
+        <Route path='/' element={ showmodel &&< Login modelcreate={showmodel} modelupdate={setShowmodel} />}/>
+        <Route path='/sing_up' element={<Singup/>}/>
       </Routes>
     </BrowserRouter>
       
