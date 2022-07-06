@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities; 
+
+.nav{
+ 
+  background: linear-gradient(90.53deg, rgba(0, 0, 0, 0.75) 0.45%, rgba(102, 80, 165, 0.75) 105.51%);
+
+}
+
+
+.sidebox{
+  background: linear-gradient(2.87deg, #130B29 9.89%, #5436A9 100%, #5E47A1 100%);
+}
