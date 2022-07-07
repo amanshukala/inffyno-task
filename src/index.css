@@ -7,6 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+*{
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -25,4 +31,33 @@ code {
 
 .sidebox{
   background: linear-gradient(2.87deg, #130B29 9.89%, #5436A9 100%, #5E47A1 100%);
+  border-radius: 0px 26px 26px 0px;
+}
+
+.home::before{
+  content: '';
+  height: 100%;
+  display: block;
+  width: 100%;
+  z-index: 1;
+  left: 0;
+  position: absolute;
+  background: linear-gradient(90deg, #000000 17.9%, rgba(0, 0, 0, 0.687449) 41.58%, rgba(196, 196, 196, 0) 100.14%);
+  top: 0;
+}
+
+.watch_movie{
+  position: absolute;
+  width: 1429px;
+  height: 399px;
+  left: 125px;
+  top: 625px;
+
+  background: rgba(11, 15, 22, 0.47);
+  box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(25px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 24px;
+
 }

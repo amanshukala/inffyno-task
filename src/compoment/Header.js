@@ -3,15 +3,16 @@ import {AiOutlineSearch} from "react-icons/ai"
 const Header = () => {
     return (
 
-        <div className=" nav  flex justify-center items-center h-[93px] w-[100%] gap-x-[90px]" >
+        <div className=" nav  flex justify-center items-center h-[93px]
+            w-[100%] absolute z-[99] gap-x-[90px]" >
             <div className='flex  justify-between ' >
                 <img src="/image/A.png" alt="dramstic" />
 
                 <ul className='flex gap-x-[37px] ml-[59px]  justify-center'>
-                    <li><a href='/'>HOME</a></li>
-                    <li><a href='/'>TV SHOW</a></li>
-                    <li><a href='/'>MOVIES</a></li>
-                    <li><a href='/'>NEW</a></li>
+                    <li><a href='/' className='text-[#A1B1CB]'>HOME</a></li>
+                    <li><a href='/' className='text-[#A1B1CB]'>TV SHOW</a></li>
+                    <li><a href='/' className='text-[#A1B1CB]'>MOVIES</a></li>
+                    <li><a href='/' className='text-[#A1B1CB]'>NEW</a></li>
                 </ul>
             </div>
 
