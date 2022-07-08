@@ -2,7 +2,6 @@ import React from 'react'
 import { Footer } from './compoment/Footer';
 import Header from './compoment/Header';
 import Homes from './compoment/Home/Homes';
-import MustWatch from './compoment/MustWatch';
 import Sidebox from './compoment/Sidebox';
 
 const App = () => {
@@ -11,10 +10,15 @@ const App = () => {
        <Header/> 
        <Sidebox/>
        <Homes/>
-       <MustWatch/>
-      {/* <Footer /> */}
+       <Footer />
     </div>
   )
 }
 
 export default App
+
+// overflow: hidden;
+// text-overflow: ellipsis;
+// max-height: 20px;
+// max-width: 150px;
+// white-space: nowrap;
