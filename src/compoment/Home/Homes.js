@@ -2,28 +2,51 @@ import React, { useEffect } from 'react'
 import axios from "axios";
 import { useState } from 'react';
 import MustWatch from './MustWatch';
-
+import { Movie } from '../MovieDetaills';
+import {useParams} from 'react-router-dom'
+import MovieCard from './MovieCard';
+import MovieDetaills from './../MovieDetaills';
 
 const Homes = () => {
   const [users, setUsers] = useState([]);
   const [users_collection, setUsersCollection] = useState([])
+  const [movieDetails,setMovieDetails] =useState([])
+
+  let {movie_id} =useParams()
+  
+  //console.log(movie_id)
+  
   useEffect(() => {
 
     const getdataHander = async () => {
       const response = await axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=15ef5245d69c4b0dc21fc692e632172c")
       // setUsers(response.data.results[1]);
-      // console.log(users);
+      // //console.log(users);
       setUsersCollection(response.data.results);
 
-      const titleresponse = await axios.get("https://api.themoviedb.org/3/movie/616037?api_key=15ef5245d69c4b0dc21fc692e632172c&append_to_response=images")
+      let m_id = movie_id ? movie_id : response.data.results[0].id
+
+      let titleresponse
+      
+      if(movie_id){
+          
+      const titleresponses = await axios.get(`https://api.themoviedb.org/3/movie/${m_id}?api_key=15ef5245d69c4b0dc21fc692e632172c&append_to_response=images,credits,videos,recommendations&language`)
+      //console.log("title" ,titleresponses);
+      
+      setMovieDetails(titleresponses) 
+      }
+      else{
+        
+       const titleresponse = await axios.get(`https://api.themoviedb.org/3/movie/${m_id}?api_key=15ef5245d69c4b0dc21fc692e632172c&append_to_response=images`)
+
+       setUsers({ ...response.data.results[1], logo: titleresponse.data.images.logos[0].file_path, genres: titleresponse.data.genres, posters : titleresponse.data.images.posters })
+      }
 
 
-      setUsers({ ...response.data.results[1], logo: titleresponse.data.images.logos[0].file_path, genres: titleresponse.data.genres, posters : titleresponse.data.images.posters })
 
-      // setUsers({...response.data.results[1], logo : titleresponse.data.logos[1].file_path})
+      
 
-    
-       //console.log(users);
+        
 
 
 
@@ -32,8 +55,8 @@ const Homes = () => {
 
   }
     , []);
-    // console.log(users);
-  // console.log(titleresponse.data.logos[0].file_path);
+    // //console.log(users);
+  // //console.log(titleresponse.data.logos[0].file_path);
     let a =new Date(users.release_date);
     let release_year = a.getFullYear() 
 
@@ -42,8 +65,8 @@ const Homes = () => {
   }
 
   return (
-    
-    <div className=' relative  '>
+    <div>
+      <div className=' relative  '>
       <div className='relative overflow-hidden home h-[100vh]'>
         <img src={`https://image.tmdb.org/t/p/w1280/${users.backdrop_path}`} className="w-[100%] absolute right-[-122px]" alt='' />
       </div>
@@ -78,11 +101,22 @@ const Homes = () => {
         </div>
 
       </div>
+      
+
+      {!movie_id  ?(
+        <div>
       <MustWatch type='upcoming' title ="MOVIES YOU MUST WATCH"/>
       <MustWatch type='top_rated' title="RECOMMENDED FOR YOU"/>
       <MustWatch type='now_playing' title="BOLLYWOOD CLASSICS"/>
+      </div>)
+      :  
+      <MovieDetaills/>
+    }
 
    </div>
+   
+    </div>
+    
       )
 }
 

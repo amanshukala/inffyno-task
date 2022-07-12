@@ -17,7 +17,7 @@ const MustWatch = (props) => {
 
     return (
         <div>
-            {users_collection ? <MovieCard movielist ={users_collection}  movietype={props.type} movietitle={props.title}/> : 'no movies'}
+            {users_collection ? <MovieCard movielist ={users_collection}  setMovielist={setUsersCollection} movietype={props.type} movietitle={props.title}/> : 'no movies'}
         </div>
     )
 }
