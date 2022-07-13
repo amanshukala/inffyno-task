@@ -6,6 +6,9 @@ import { Movie } from '../MovieDetaills';
 import {useParams} from 'react-router-dom'
 import MovieCard from './MovieCard';
 import MovieDetaills from './../MovieDetaills';
+import Header from './../Header';
+import Sidebox from './../Sidebox';
+import { Footer } from '../Footer';
 
 const Homes = () => {
   const [users, setUsers] = useState([]);
@@ -39,7 +42,7 @@ const Homes = () => {
         
        const titleresponse = await axios.get(`https://api.themoviedb.org/3/movie/${m_id}?api_key=15ef5245d69c4b0dc21fc692e632172c&append_to_response=images`)
 
-       setUsers({ ...response.data.results[1], logo: titleresponse.data.images.logos[0].file_path, genres: titleresponse.data.genres, posters : titleresponse.data.images.posters })
+       setUsers({ ...response.data.results[1], logo: titleresponse.data.images.logos[5].file_path, genres: titleresponse.data.genres, posters : titleresponse.data.images.posters })
       }
 
 
@@ -64,24 +67,33 @@ const Homes = () => {
     return <p>loading...</p>
   }
 
+  console.log(users.genres);
+
+
   return (
+    <>
+    <Header/> 
+    <Sidebox/>
+
+
     <div>
       <div className=' relative  '>
-      <div className='relative overflow-hidden home h-[100vh]'>
+      <div className='relative overflow-hidden home  h-[100vh]  '>
         <img src={`https://image.tmdb.org/t/p/w1280/${users.backdrop_path}`} className="w-[100%] absolute right-[-122px]" alt='' />
       </div>
       <div className=' absolute top-[138px] left-[149px] z-[9]'>
         <img src={`https://image.tmdb.org/t/p/w500/${users.logo}`} className="max-h-[180px]"  alt="" />
         <div className='mt-[49px] '>
-        <p className='text-[#FFFFFF] text-[14px] font-[600px]  text-justify w-[100%] max-w-[560px]'>{users.overview}</p>
+        <p className='text-[#FFFFFF] text-[14px] font-[600px]  text-justify w-[100%] max-w-[560px] overview'>{users.overview}</p>
         <p className='text-[red] text-[14px] font-[600px] mt-[18px]'>GENRES</p>
-    
+        <span className='text-[14px] text-[white] font-[600px] '>
         {users.genres.map((p,key) => {
           return (
             
-              <span key={p.id} className='text-[14px] text-[white] font-[600px] '>{`${p.name},`}</span>
+              p.name
 
-          )})}
+          )}).join(', ')}
+        </span>
 
         </div>
         <div className='flex gap-x-[21px] mt-[21px] item-center'>
@@ -116,6 +128,9 @@ const Homes = () => {
    </div>
    
     </div>
+    <Footer/>
+    
+    </>
     
       )
 }

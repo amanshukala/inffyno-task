@@ -75,6 +75,24 @@ code {
 
 }
 
+.react-player iframe {
+  height: 100vh;
+  width: 100vw;
+}
+
+.recommend_movie{
+  /* position: absolute; */
+  width: 85vw;
+  margin-left: auto;
+
+  right: 0px;
+  top: 625px;
+
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 24px;
+
+}
 .slick-track {
     display: flex;
     column-gap: 40px;
@@ -91,3 +109,15 @@ border-radius: 24px;
 }
 
 
+.overview{
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.movie_trailer{
+  filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.36));
+
+}

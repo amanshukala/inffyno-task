@@ -3,7 +3,7 @@ import {AiOutlineSearch} from "react-icons/ai"
 const Header = () => {
     return (
 
-        <div className=" nav  flex justify-center items-center h-[93px]
+        <div className=" nav max-w-[1440px] flex justify-center items-center h-[93px]
             w-[100%] absolute z-[99] gap-x-[90px]" >
             <div className='flex  justify-between ' >
                 <img src="/image/A.png" alt="dramstic" />

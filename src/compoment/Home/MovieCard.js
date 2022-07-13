@@ -1,8 +1,9 @@
 
-import React, { useState } from 'react'
+import React from 'react'
 import Slider from "react-slick";
 import { IoIosArrowDown } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
+import RecomededMovie from './../RecomededMovie';
 
 
 const MovieCard = (props) => {
@@ -20,20 +21,22 @@ const MovieCard = (props) => {
 
     return (
         <div>
-            <div className=' watch_movie   overflow-hidden  z-[67] '>
-                <div className='flex items-center justify-between'>
-
+            <div className={props.movietype === "upcoming" ? "watch_movie  overflow-hidden  z-[67] " : "test    recommend_movie  overflow-hidden  z-[67] "}>
+                <div className='flex items`-center justify-between'>
+                    <div className='flex flex-col '>
                     {props.movietype === "upcoming" && (<h1 className='text-[#FFFFFF] text-[18px] font-bold mt-[26px] ml-[23px]'>MOVIES YOU MUST WATCH</h1>)}
                     {props.movietype === "top_rated" && (<h1 className='text-[#FFFFFF] text-[18px] font-bold mt-[26px] ml-[23px]'>RECOMMENDED FOR YOU</h1>)}
                     {props.movietype === "now_playing" && (<h1 className='text-[#FFFFFF] text-[18px] font-bold mt-[26px] ml-[23px]'>BOLLYWOOD CLASSICS</h1>)}
 
-
+                    {props.movietype === "top_rated" && ( <RecomededMovie/>) }
+                    </div>
+    
                     {props.movietype === "upcoming" && (<button className='rounded-[30px] bg-[#5C5C5C] py-[11px] pl-[28px] mt-[12px] 
                 pr-[18px] flex items-center text-[16px] font-bold
               text-[white]'>FILTER <span className='ml-[18px] '><IoIosArrowDown /></span></button>)}
 
                 </div>
-                <div className='ml-[23px]'>
+                <div className='ml-[23px] max-w-[1440px]'>
                     <Slider {...settings}>
                         {props.movielist.map((p, key) => {
                             return (
