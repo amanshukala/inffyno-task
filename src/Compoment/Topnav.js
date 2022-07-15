@@ -3,10 +3,9 @@ import { BsBell } from 'react-icons/bs';
 
 const Topnav = () => {
   return (
-    <div>
-        <div className=' flex items-center z-[4]
-        w-[100%] h-[60px]
-        fixed top-0 bg-back-color ] mb-[10px]'>
+    
+        <div className=' mx-auto max-w-[1366px] bg-back-color flex justify-center items-center
+        '>
             
                 <img src="https://www.fancode.com/867f5c067d544a3f79567a893209f1c4.svg" 
                     alt='' style={{"width" :"144px"}}
@@ -37,7 +36,7 @@ const Topnav = () => {
                 </div>
             </div>
         </div>
-    </div>
+    // </div>
   )
 }
 

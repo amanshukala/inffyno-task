@@ -4,7 +4,7 @@ import Slider from './Slider'
 
 const Home = () => {
   return (
-    <div>
+    <div className=' mx-auto max-w-[1366px]'>
         <Slider />
             
     </div>
