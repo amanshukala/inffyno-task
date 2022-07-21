@@ -2,8 +2,9 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className=' mx-auto max-w-[1366px]
-    flex flex-col justify-center bg-back-color'>
+    <div className='bg-back-color'>
+          <div className=' mx-auto  max-w-[1024px]  w-[100%]
+    flex flex-col justify-center '>
         <div className='my-[32px] mx-auto'>
             <img src="https://www.fancode.com/b9a4bc578a5a1e8c7703327bc58b108f.svg"
             className='w-[144px]'
@@ -44,6 +45,8 @@ const Footer = () => {
           </div>
 
     </div>
+    </div>
+
   )
 }
 

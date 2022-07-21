@@ -11,6 +11,8 @@ module.exports = {
         "back-color" : "rgb(0, 18, 64)",
         "header-text-color" : "rgb(255, 80, 0)",
         "header-card-color" :"rgb(0, 18, 64)",
+        "icon-color" :"rgb(255, 220, 204)",
+        "greater-color" :"rgb(240,241,242)",
       }
     },
   },
