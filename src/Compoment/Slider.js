@@ -11,7 +11,7 @@ const Slider = (props) => {
    const [live_Data ,setLive_Data] =useState([])  
    const [upcoming_Data ,setUpcoming_Data] = useState([])
   const fetchData = async() => {
-    const {data,status} =  await axios.get(base_url+api_token+"include=localteam,visitorteam,runs,season,league")
+    const {data,status} =  await axios.get(base_url+"fixtures"+api_token+"&include=localteam,visitorteam,runs,season,league")
     
     
 
@@ -44,7 +44,7 @@ const Slider = (props) => {
           
 }, [])
 
-console.log(upcoming_Data);
+
   
 return (
     <div>

@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <div className='bg-back-color'>
-          <div className=' mx-auto  max-w-[1024px]  w-[100%]
+          <div className=' mx-auto    w-[100%]
     flex flex-col justify-center '>
         <div className='my-[32px] mx-auto'>
             <img src="https://www.fancode.com/b9a4bc578a5a1e8c7703327bc58b108f.svg"
@@ -27,7 +27,7 @@ const Footer = () => {
                 Kurla Complex, Bandra (East), Mumbai, Maharashtra-400051
               </p>
             </div>
-            <div>
+            <div className=''>
               <p>
                 <a  className="text-white">Careers</a>
                 <span className="text-white"> | </span>

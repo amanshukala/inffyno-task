@@ -1,23 +1,85 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {useParams} from "react-router-dom"
 import {AiOutlineDown} from "react-icons/ai"
 import {IoIosArrowUp} from "react-icons/io"
+import ScoreCard from './ScoreCard'
+import axios from "axios";
+
+import { base_url } from './Config'
+import { api_token } from './Config'
 
 const ScorePage = () => {
     const {id} =useParams();
-    const[open ,setOpen] =useState(false)
+    const [localbtting_Data ,setLocalbtting_Data] = useState(null)
+    const [visitorteambowl_Data ,setvisitorteambowl_Data] = useState(null)
+    const [localbowl_Data ,setLocalbowl_Data] = useState(null)
 
-    const accordianHander =()=>{
-        if(open === false){
-            setOpen(true)
-        }
-        else{
-            setOpen(false)
-        }
-    }
 
+    const [visitorteambtting_Data ,setVisitorteambtting_Data] = useState(null)
 
   
+    const ScoreApiHander =async () =>{
+        const {data,status} = await axios.get( base_url+"fixtures/"+id+api_token+"include=localteam,visitorteam,bowling.team,batting.team,runs.team,bowling.bowler,batting.batsman")
+        // setScore_Data(data.data);
+        if(status === 200){
+            
+            const localteam_id = data.data.localteam_id;
+            const visitorteam_id = data.data.visitorteam_id;
+
+            const localtem_batting_data = data.data.batting.filter((data) => {
+              return data.team_id === localteam_id;
+            });
+            setLocalbtting_Data(localtem_batting_data)
+
+            const localScore  = data.data.runs.filter((data)=>{
+                if(data.team_id === localteam_id ){
+                    return data;
+                }
+              })
+            console.log(localScore);
+
+            const vistoryScore  = data.data.runs.filter((data)=>{
+                if(data.team_id === visitorteam_id ){
+                    return data;
+                }
+              })
+            console.log(vistoryScore);
+
+
+
+            const visitorteam_batting_data = data.data.batting.filter((data) => {
+                return data.team_id === visitorteam_id;
+              });
+
+              setVisitorteambtting_Data(visitorteam_batting_data)
+              
+            
+              const localtem_bowling_data = data.data.bowling.filter((data) => {
+                return data.team_id === localteam_id;
+              });
+              
+              setLocalbowl_Data(localtem_bowling_data)
+            
+              const visitorteam_bowling_data = data.data.bowling.filter((data) => {
+                return data.team_id === visitorteam_id;
+              });
+              setvisitorteambowl_Data(visitorteam_bowling_data)
+
+      
+            //   console.log(localtem_bowling_data);
+            //   console.log(visitorteam_bowling_data);
+
+
+        }
+     
+    }
+    
+
+    
+    
+    useEffect(()=>{
+        ScoreApiHander()
+    },[])
 
   return (
     <div className='mx-auto max-w-[672px] mt-[53px] mb-[320px] w-[100%]'>
@@ -65,31 +127,13 @@ const ScorePage = () => {
             w-[100%] justify-center px-[20px]'>Scoredcard</div>
             <div className='flex items-center
             w-[100%] justify-center px-[20px]'>Squard</div>
+                        <div className='flex items-center
+            w-[100%] justify-center px-[20px]'>Highlights</div>
+
         </div>
-        <div className='flex justify-between bg-gray-300 py-[12px] px-[18px]'>
-            <div className='text-[16px] font-semibold'>AM</div>
-            <div className='flex '>
-                <div className='text-[14px] font-semibold pr-[75px]
-                text-black'>96/9</div>
-                <div>
-                    {open ? ( <IoIosArrowUp className=' text-[1.5rem]
-                    rounded-[50%] bg-[#ff5000] p-[6px] text-white'
-                    onClick={accordianHander}/>): ( <AiOutlineDown className=' text-[1.5rem]
-                rounded-[50%] bg-[#ff5000] p-[6px] text-white'
-                onClick={accordianHander}/>)}
-            </div>
-               {}    
-                {/* <div className={`${open}? "" :"overflow-hidden h-0]"`}> */}
-                <div className=  {`${open ? 'h-[100%]' : "h-0 overflow-hidden"}` }>
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
-                    <div>4</div>
-                    
-                </div>
-            </div>
-        </div>
+        <ScoreCard    victoribowl_data={visitorteambowl_Data}   localteam_batting_score={localbtting_Data}/>
+        <ScoreCard  victoribowl_data={localbowl_Data}   localteam_batting_score={visitorteambtting_Data}/>
+
         
     </div>
   )
