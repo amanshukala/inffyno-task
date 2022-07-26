@@ -14,6 +14,10 @@ const ScoreCard = (props) => {
     }
   };
 
+  // console.log(props.teamScore[0])
+
+  // console.log("effefe" ,props.localteam_batting_score);
+
   return (
     <div>
       <div className="flex  justify-between  py-[12px] px-[18px]">
@@ -23,7 +27,8 @@ const ScoreCard = (props) => {
             className="text-[14px] font-semibold pr-[75px]
                 text-black"
           >
-            96/9
+          {props.teamScore[0]?.score}/{props.teamScore[0]?.wickets}
+
           </div>
           <div>
             {open ? (
@@ -80,10 +85,10 @@ const ScoreCard = (props) => {
           items-start flex-col pr-[10px]"
                   >
                     <p className="text-[14px] whitespace-nowrap font-normal text-batmanname_color  w-[60px]">
-                      {p.batsman.fullname}
+                      {p?.batsman?.fullname}{p.batsman.position?.name === "Wicketkeeper" ? ("(wk)") : p?.batsman?.position?.name === "Captain" ? ("(c)"):""}
                     </p>
                     <p className="pt-[5px] text-[11px] text-gray-400  w-[60px] whitespace-nowrap">
-                      {}
+                      {p?.catch_stump_player_id ? (`c ${p.firstname} ${p?.lastname?.toSubstring(0,1)}`) : "NotOut"}
                     </p>
                   </div>
                   <div className="flex items-start">
@@ -101,7 +106,7 @@ const ScoreCard = (props) => {
               );
             })}
         </div>
-        {/* <div
+        <div
                     className="flex w-[98%] justify-between
                item-start text-[gray] p-[10px]"
                   >
@@ -134,12 +139,13 @@ const ScoreCard = (props) => {
                       Total Score
                     </p>
                     <div className="text-[14px] font-semibold  text-[black]">
-                      {p.runs / p.wickets}{" "}
+                    {
+                    props.teamScore[0]?.score}/{props.teamScore[0]?.wickets}*
                       <span className="text-[12px] text-[gray]">
-                        ({p?.overs} Overs)
+                        ({props.teamScore[0]?.overs} Overs)
                       </span>
                     </div>
-                  </div> */}
+                  </div>
 
         <div
           className=" 

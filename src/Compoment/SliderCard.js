@@ -1,19 +1,63 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
+import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { FaGreaterThan } from "react-icons/fa";
 
-// import required modules
-import { Pagination, Navigation } from "swiper";
+import Slider from "react-slick";
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+   
+
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        background: "#FAFAFA",
+        borderRadius: "50%",
+        width: "48px",
+        height: "48px",
+        overflow: "hidden",
+      }}
+      onClick={onClick}
+    >
+      <HiArrowRight
+        fill="#ff5000"
+        size={24}
+        className="relative top-[-8px] left-[12px] "
+      />
+    </div>
+  );
+}
+
+const SamplePrevArrow =(props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "#FAFAFA" ,width:"48px",height:"48px",top:"" ,borderRadius:"50%",overflow:"hidden",zIndex:"2" }}
+      onClick={onClick}
+    >
+    <HiArrowLeft fill='#ff5000' size={24} className='relative top-[-8px] left-[12px]' />
+    </div>
+  );
+}
+
 
 const SliderCard = (props) => {
-  
+  const settings = {
+    dots: true,
+    infinite: true,
+
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+  };
 
   return (
     <div
@@ -36,22 +80,10 @@ const SliderCard = (props) => {
         </h1>
 
         <div className="  mx-auto ">
-          <Swiper
-            slidesPerView={3}
-            spaceBetween={30}
-            slidesPerGroup={3}
-            loop={true}
-            loopFillGroupWithBlank={true}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
-            className="mySwiper "
-          >
+          <Slider {...settings}>
             {props.data_card?.map((p, key) => {
               return (
-                <SwiperSlide key={p.id} className="group">
+                <div key={p.id} className="group">
                   <div
                     className="max-w-max relative
                       border-[1px]
@@ -133,11 +165,13 @@ const SliderCard = (props) => {
                     >
                       <div
                         className="flex ml-[12px] 
-               items-center gap-x-[9px]">
+               items-center gap-x-[9px]"
+                      >
                         <div
                           className="text-[11px] rounded-[2px]
                  px-[4px] text-center py-[1px] h-[16px]
-                 bg-icon-color text-[#FF5000]">
+                 bg-icon-color text-[#FF5000]"
+                        >
                           Live
                         </div>
                         <img
@@ -157,22 +191,20 @@ const SliderCard = (props) => {
                flex rounded-[30px] px-[21px] py-[4px] m-auto
                font-semibold"
                       >
-                        
                         {props.type === "Update Matchhes" && (
-                          <Link to ={`/${p.id}`}>
+                          <Link to={`/${p.id}`}>
                             <div className="flex gap-[6px] bg-[#FF5000]">
-                            <span>
-                              <img
-                                src="/images/butto.svg"
-                                alt=""
-                                className="w-[24px] h-[24px] mr-[4px]
+                              <span>
+                                <img
+                                  src="/images/butto.svg"
+                                  alt=""
+                                  className="w-[24px] h-[24px] mr-[4px]
               "
-                              />
-                            </span>
-                            <p>WATCH LIVE</p>
-                          </div>
+                                />
+                              </span>
+                              <p>WATCH LIVE</p>
+                            </div>
                           </Link>
-                          
                         )}
 
                         {props.type === "Finished of Matched" && (
@@ -204,10 +236,10 @@ const SliderCard = (props) => {
                       <FaGreaterThan className="h-[15px] w-[15px] rounded-[50%] bg-[#FF5000] text-[0.5em]" />
                     </div>
                   </div>
-                </SwiperSlide>
+                </div>
               );
             })}
-          </Swiper>
+          </Slider>
         </div>
       </div>
     </div>
