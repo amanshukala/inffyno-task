@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { CSSProperties,useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { AiOutlineDown } from "react-icons/ai";
-import { IoIosArrowUp } from "react-icons/io";
 import ScoreCard from "./ScoreCard";
-import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchscore } from "../../Store/scoreSlice";
 import { STATUSES } from "../../Store/scoreSlice";
+import ClipLoader from "react-spinners/ClipLoader";
 
-import { base_url } from "../Config";
-import { api_token } from "../Config";
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
 
 const ScorePage = () => {
+
+  let [color, setColor] = useState("#ffffff");
+  
+
   const { id } = useParams();
   
 
@@ -70,17 +76,28 @@ const ScorePage = () => {
     
   }, []);
 
-  if (status === STATUSES.LOADING) {
-    return <h2>Loading....</h2>;
-  }
+  // if (status === STATUSES.LOADING) {
+  //   return <h2>Loading....</h2>;
+  // }
 
   if (status === STATUSES.ERROR) {
     return <h2>Something went wrong!</h2>;
   }
 
   return (
-  
-    <div className="mx-auto max-w-[672px] mt-[53px] mb-[320px] w-[100%]">
+  <div>
+
+
+    {status === STATUSES.LOADING ?(<div className="sweet-loading">
+     
+
+     <ClipLoader
+       color={color}
+       cssOverride={override}
+       size={150}
+     />
+   </div>)  : (   
+      <div className="mx-auto max-w-[672px] mt-[53px] mb-[320px] w-[100%]">
       <div>
         <div className="flex justify-between ">
           <div className="flex flex-col items-start">
@@ -199,7 +216,11 @@ const ScorePage = () => {
         teamScore ={vistoScore}
 
       />
-    </div>
+    </div>) }
+      
+      
+  </div>
+  
   );
 };
 

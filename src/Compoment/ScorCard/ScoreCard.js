@@ -200,28 +200,46 @@ const ScoreCard = (props) => {
             );
           })}
         <div>
-        <div
-          className=" flex w-[100%] rounded-[10px] border-b-0 justify-between
+          <div
+            className=" flex w-[100%] rounded-[10px] border-b-0 justify-between
                       item-start mt-[20px] bg-scorerowbg-color text-[grey]
-                      p-[10px]">
-          <div className="text-[12px] text-[grey]">FALL OF WICKETS</div>
-          <div className="flex">
-            <p className="text-[12px] text-[grey]">SCORE</p>
-            <p className="text-[12px] text-[grey]">OVER</p>
+                      p-[10px] "
+          >
+            <div className="text-[12px] text-[grey] w-[60px]">FALL OF WICKETS</div>
+            <div className="flex gap-x-[92px]  mr-[39px]">
+              <p className="text-[12px] text-[grey] w-[60px]">SCORE</p>
+              <p className="text-[12px] text-[grey] w-[60px]">OVER</p>
+            </div>
           </div>
+
+          {props.localteam_batting_score &&
+                props.localteam_batting_score.map((data, index) => {
+                  return (
+                  
+                    data.fow_balls > 0 && (
+                      <div
+                        className="px-[10px] my-[10px] flex flex-col"
+                        key={index}
+                      >
+                        <div className="flex justify-between  w-[100%] items-center">
+                          <div>
+                            <span className="text-[rgb(0,129,255)] text-[14px]">
+                              {data.batsman.fullname}
+                            </span>
+                          </div>
+                          <div className="flex  gap-x-[92px] text-[grey]  mr-[39px]">
+                            <span className=" min-w-[60px]">
+                              {data.fow_score}
+                            </span>
+                            <span className=" w-[60px]">{data.fow_balls}</span>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  );
+                })}
+
         </div>
-        <div className="flex w-[100%] rounded-[10px] border-b-0 justify-between
-                      item-start mt-[20px] bg-scorerowbg-color
-                      p-[10px]">
-          <p>Shikhar Dhawan (c)</p>
-          <div className="flex">
-          <p>48</p>
-          <p>10.6</p>
-          </div>
-         
-        </div>
-        </div>
-        
       </div>
     </div>
   );
