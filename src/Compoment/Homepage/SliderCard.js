@@ -65,8 +65,8 @@ const SliderCard = (props) => {
         props.type === "Update Matchhes"
           ? "h-[147px]  bg-back-color mb-[220px] "
           : " "
-      }
-    ${props.type === "Upcoming Matchhes" ? " mb-[320px]" : ""} `}
+        }
+      ${props.type === "Upcoming Matchhes" ? " mb-[320px]" : ""} `}
     >
       <div className="mx-auto max-w-[1024px]  w-[100%]   ">
         <h1
@@ -180,11 +180,11 @@ const SliderCard = (props) => {
                           alt=""
                         />
                       </div>
-                      <p className="text-[white]  mt-[22px] text-center">
+                      <div className="text-[white]  mt-[22px] text-center">
                         <p>
                           {p?.round} {p?.league.name}, {p?.season.name}
                         </p>
-                      </p>
+                      </div>
                       <button
                         className="bg-[#FF5000] 
                text-[white] text-[14px] max-w-max
@@ -195,6 +195,7 @@ const SliderCard = (props) => {
                           <Link to={`/${p.id}`}>
                             <div className="flex gap-[6px] bg-[#FF5000]">
                               <span>
+
                                 <img
                                   src="/images/butto.svg"
                                   alt=""

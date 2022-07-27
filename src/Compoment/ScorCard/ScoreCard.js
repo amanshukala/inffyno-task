@@ -27,8 +27,8 @@ const ScoreCard = (props) => {
             className="text-[14px] font-semibold pr-[75px]
                 text-black"
           >
-          {props.teamScore[0]?.score}/{props.teamScore[0]?.wickets}
-
+            {props.teamScore && props.teamScore[0]?.score}/
+            {props.teamScore && props.teamScore[0]?.wickets}
           </div>
           <div>
             {open ? (
@@ -85,10 +85,17 @@ const ScoreCard = (props) => {
           items-start flex-col pr-[10px]"
                   >
                     <p className="text-[14px] whitespace-nowrap font-normal text-batmanname_color  w-[60px]">
-                      {p?.batsman?.fullname}{p.batsman.position?.name === "Wicketkeeper" ? ("(wk)") : p?.batsman?.position?.name === "Captain" ? ("(c)"):""}
+                      {p?.batsman?.fullname}
+                      {p.batsman.position?.name === "Wicketkeeper"
+                        ? "(wk)"
+                        : p?.batsman?.position?.name === "Captain"
+                        ? "(c)"
+                        : ""}
                     </p>
                     <p className="pt-[5px] text-[11px] text-gray-400  w-[60px] whitespace-nowrap">
-                      {p?.catch_stump_player_id ? (`c ${p.firstname} ${p?.lastname?.toSubstring(0,1)}`) : "NotOut"}
+                      {p?.catch_stump_player_id
+                        ? `c ${p.firstname} ${p?.lastname?.toSubstring(0, 1)}`
+                        : "NotOut"}
                     </p>
                   </div>
                   <div className="flex items-start">
@@ -107,45 +114,37 @@ const ScoreCard = (props) => {
             })}
         </div>
         <div
-                    className="flex w-[98%] justify-between
+          className="flex w-[98%] justify-between
                item-start text-[gray] p-[10px]"
-                  >
-                    <p className="text-[14px] font-semibold text-[black]">
-                      Extras
-                    </p>
-                    <div className="text-[14px] font-semibold text-[black]">
-                      2{" "}
-                      <span className="text-[12px] text-[gray]">
-                        (b 0, lb 1, nb 0, w 1, p 0)
-                      </span>
-                    </div>
-                  </div>
-                  <div
-                    className="flex w-[98%] justify-between
+        >
+          <p className="text-[14px] font-semibold text-[black]">Extras</p>
+          <div className="text-[14px] font-semibold text-[black]">
+            2{" "}
+            <span className="text-[12px] text-[gray]">
+              (b 0, lb 1, nb 0, w 1, p 0)
+            </span>
+          </div>
+        </div>
+        <div
+          className="flex w-[98%] justify-between
                item-start text-[gray] p-[10px]"
-                  >
-                    <p className="text-[14px] font-semibold text-[black]">
-                      Did Not Bat
-                    </p>
-                    <div className="text-[12px]  text-[gray]">
-                      Santhamoorthy S
-                    </div>
-                  </div>
-                  <div
-                    className="flex w-[98%] justify-between
+        >
+          <p className="text-[14px] font-semibold text-[black]">Did Not Bat</p>
+          <div className="text-[12px]  text-[gray]">Santhamoorthy S</div>
+        </div>
+        <div
+          className="flex w-[98%] justify-between
                item-start text-[gray] p-[10px]"
-                  >
-                    <p className="text-[14px] font-semibold text-[black]">
-                      Total Score
-                    </p>
-                    <div className="text-[14px] font-semibold  text-[black]">
-                    {
-                    props.teamScore[0]?.score}/{props.teamScore[0]?.wickets}*
-                      <span className="text-[12px] text-[gray]">
-                        ({props.teamScore[0]?.overs} Overs)
-                      </span>
-                    </div>
-                  </div>
+        >
+          <p className="text-[14px] font-semibold text-[black]">Total Score</p>
+          <div className="text-[14px] font-semibold  text-[black]">
+            {props.teamScore && props.teamScore[0]?.score}/
+            {props.teamScore && props.teamScore[0]?.wickets}*
+            <span className="text-[12px] text-[gray]">
+              ({props.teamScore && props.teamScore[0]?.overs} Overs)
+            </span>
+          </div>
+        </div>
 
         <div
           className=" 
@@ -167,7 +166,6 @@ const ScoreCard = (props) => {
 
         {props.victoribowl_data &&
           props.victoribowl_data.map((p, index) => {
-        
             return (
               <div
                 key={index}
@@ -186,7 +184,7 @@ const ScoreCard = (props) => {
                     {p.bowler.fullname}
                   </p>
                   <p className="pt-[5px] text-[11px] text-gray-400  w-[60px] whitespace-nowrap">
-                    {}
+                    sxsxsx
                   </p>
                 </div>
                 <div className="flex items-start">
@@ -201,6 +199,29 @@ const ScoreCard = (props) => {
               </div>
             );
           })}
+        <div>
+        <div
+          className=" flex w-[100%] rounded-[10px] border-b-0 justify-between
+                      item-start mt-[20px] bg-scorerowbg-color text-[grey]
+                      p-[10px]">
+          <div className="text-[12px] text-[grey]">FALL OF WICKETS</div>
+          <div className="flex">
+            <p className="text-[12px] text-[grey]">SCORE</p>
+            <p className="text-[12px] text-[grey]">OVER</p>
+          </div>
+        </div>
+        <div className="flex w-[100%] rounded-[10px] border-b-0 justify-between
+                      item-start mt-[20px] bg-scorerowbg-color
+                      p-[10px]">
+          <p>Shikhar Dhawan (c)</p>
+          <div className="flex">
+          <p>48</p>
+          <p>10.6</p>
+          </div>
+         
+        </div>
+        </div>
+        
       </div>
     </div>
   );
