@@ -27,3 +27,8 @@ code {
 .slick-dots{
   display: none !important;
 }
+
+.slick-slide {
+
+  padding-right: 9px;
+}

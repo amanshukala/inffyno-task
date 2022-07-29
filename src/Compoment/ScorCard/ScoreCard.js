@@ -4,6 +4,7 @@ import { AiOutlineDown } from "react-icons/ai";
 import { IoIosArrowUp } from "react-icons/io";
 
 const ScoreCard = (props) => {
+
   const [open, setOpen] = useState(false);
 
   const accordianHander = () => {
@@ -21,7 +22,7 @@ const ScoreCard = (props) => {
   return (
     <div>
       <div className="flex  justify-between  py-[12px] px-[18px]">
-        <div className="text-[16px] font-semibold">AM</div>
+        <div className="text-[16px] font-semibold">{props.teamScore && props.teamScore[0]?.team?.code}</div>
         <div className="flex ">
           <div
             className="text-[14px] font-semibold pr-[75px]
