@@ -1,4 +1,4 @@
-import React, { CSSProperties ,useState,useEffect } from "react";
+import React, { CSSProperties, useState, useEffect } from "react";
 import SliderCard from "./SliderCard";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,6 @@ const override: CSSProperties = {
 };
 
 const Slider = (props) => {
-
   let [color, setColor] = useState("#ffffff");
 
   const dispatch = useDispatch();
@@ -49,22 +48,17 @@ const Slider = (props) => {
 
   return (
     <div>
-      {status === STATUSES.LOADING ? (<div className="sweet-loading">
-     
-
-        <ClipLoader
-          color={color}
-        
-          cssOverride={override}
-          size={150}
-        />
-      </div>) : ( <div>
-        <SliderCard type="Update Matchhes" data_card={apiData} />
-        <SliderCard type="Finished of Matched" data_card={livestatus} />
-        <SliderCard type="Upcoming Matchhes" data_card={upstatus} />
-      </div>)}
-      
-     
+      {status === STATUSES.LOADING ? (
+        <div className="sweet-loading">
+          <ClipLoader color={color} cssOverride={override} size={150} />
+        </div>
+      ) : (
+        <div>
+          <SliderCard type="Update Matchhes" data_card={apiData} />
+          <SliderCard type="Finished of Matched" data_card={livestatus} />
+          <SliderCard type="Upcoming Matchhes" data_card={upstatus} />
+        </div>
+      )}
     </div>
   );
 };

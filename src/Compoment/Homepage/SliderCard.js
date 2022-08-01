@@ -10,8 +10,6 @@ import Slider from "react-slick";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
-   
-
     <div
       className={className}
       style={{
@@ -34,19 +32,32 @@ function SampleNextArrow(props) {
   );
 }
 
-const SamplePrevArrow =(props) => {
+const SamplePrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "#FAFAFA" ,width:"48px",height:"48px",top:"" ,borderRadius:"50%",overflow:"hidden",zIndex:"2" }}
+      style={{
+        ...style,
+        display: "block",
+        background: "#FAFAFA",
+        width: "48px",
+        height: "48px",
+        top: "",
+        borderRadius: "50%",
+        overflow: "hidden",
+        zIndex: "2",
+      }}
       onClick={onClick}
     >
-    <HiArrowLeft fill='#ff5000' size={24} className='relative top-[-8px] left-[12px]' />
+      <HiArrowLeft
+        fill="#ff5000"
+        size={24}
+        className="relative top-[-8px] left-[12px]"
+      />
     </div>
   );
-}
-
+};
 
 const SliderCard = (props) => {
   const settings = {
@@ -65,7 +76,7 @@ const SliderCard = (props) => {
         props.type === "Update Matchhes"
           ? "h-[147px]  bg-back-color mb-[220px] "
           : " "
-        }
+      }
       ${props.type === "Upcoming Matchhes" ? " mb-[320px]" : ""} `}
     >
       <div className="mx-auto max-w-[1024px]  w-[100%]   ">
@@ -195,7 +206,6 @@ const SliderCard = (props) => {
                           <Link to={`/${p.id}`}>
                             <div className="flex gap-[6px] bg-[#FF5000]">
                               <span>
-
                                 <img
                                   src="/images/butto.svg"
                                   alt=""

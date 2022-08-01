@@ -17,6 +17,8 @@ const intialState = {
     visitorteambtting_Data : null,
     visitorteambowl_Data : null,
     localbowl_Data :null ,
+
+    
 }
 
 
@@ -50,6 +52,7 @@ const scoreSlice = createSlice({
         // data: [],
         intialState,
         status: STATUSES.IDLE,
+        isScroll : 0
     },
     reducers: {
         cleanData: (state) => {
@@ -61,8 +64,12 @@ const scoreSlice = createSlice({
             state.visitorteambtting_Data = null;
             state.visitorteambowl_Data = null;
             state.localbowl_Data = null;
+            
+
           },
-      
+        setScroll : (state, action) => {
+            state.isScroll = action.payload
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -118,7 +125,7 @@ const scoreSlice = createSlice({
     },
 });
 
-export const { setScores, setStatus } = scoreSlice.actions;
+export const { setScores, setStatus, setScroll } = scoreSlice.actions;
 export default scoreSlice.reducer;
 
 export const { cleanData } = scoreSlice.actions;

@@ -1,28 +1,27 @@
 import React, { useState } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setScroll } from "../../Store/scoreSlice";
 import { AiOutlineDown } from "react-icons/ai";
 import { IoIosArrowUp } from "react-icons/io";
 
 const ScoreCard = (props) => {
-
   const [open, setOpen] = useState(false);
 
+  const { isScroll } = useSelector((state) => state.score);
+  const dispatch = useDispatch();
   const accordianHander = () => {
-    if (open === false) {
-      setOpen(true);
-    } else {
-      setOpen(false);
-    }
+    
+    dispatch(setScroll(isScroll === props.index ? 0 : props.index));
+    
   };
 
-  // console.log(props.teamScore[0])
-
-  // console.log("effefe" ,props.localteam_batting_score);
 
   return (
-    <div>
+    <div className="border-b-black border-b-[1px] border-solid">
       <div className="flex  justify-between  py-[12px] px-[18px]">
-        <div className="text-[16px] font-semibold">{props.teamScore && props.teamScore[0]?.team?.code}</div>
+        <div className="text-[16px] font-semibold">
+          {props.teamScore && props.teamScore[0]?.team?.code}
+        </div>
         <div className="flex ">
           <div
             className="text-[14px] font-semibold pr-[75px]
@@ -32,7 +31,7 @@ const ScoreCard = (props) => {
             {props.teamScore && props.teamScore[0]?.wickets}
           </div>
           <div>
-            {open ? (
+            {isScroll === props.index ? (
               <IoIosArrowUp
                 className=" text-[1.5rem]
                     rounded-[50%] bg-[#ff5000] p-[6px] text-white"
@@ -49,7 +48,11 @@ const ScoreCard = (props) => {
         </div>
       </div>
 
-      <div className={`${open ? "h-[100%]" : "h-0 overflow-hidden"}`}>
+      <div
+        className={`${
+          isScroll === props.index ? "h-[100%]" : "h-0 overflow-hidden"
+        }`}
+      >
         <div className="flex flex-col  items-center w-[100%]">
           <div
             className=" 
@@ -206,7 +209,9 @@ const ScoreCard = (props) => {
                       item-start mt-[20px] bg-scorerowbg-color text-[grey]
                       p-[10px] "
           >
-            <div className="text-[12px] text-[grey] w-[60px]">FALL OF WICKETS</div>
+            <div className="text-[12px] text-[grey] w-[60px]">
+              FALL OF WICKETS
+            </div>
             <div className="flex gap-x-[92px]  mr-[39px]">
               <p className="text-[12px] text-[grey] w-[60px]">SCORE</p>
               <p className="text-[12px] text-[grey] w-[60px]">OVER</p>
@@ -214,32 +219,28 @@ const ScoreCard = (props) => {
           </div>
 
           {props.localteam_batting_score &&
-                props.localteam_batting_score.map((data, index) => {
-                  return (
-                  
-                    data.fow_balls > 0 && (
-                      <div
-                        className="px-[10px] my-[10px] flex flex-col"
-                        key={index}
-                      >
-                        <div className="flex justify-between  w-[100%] items-center">
-                          <div>
-                            <span className="text-[rgb(0,129,255)] text-[14px]">
-                              {data.batsman.fullname}
-                            </span>
-                          </div>
-                          <div className="flex  gap-x-[92px] text-[grey]  mr-[39px]">
-                            <span className=" min-w-[60px]">
-                              {data.fow_score}
-                            </span>
-                            <span className=" w-[60px]">{data.fow_balls}</span>
-                          </div>
-                        </div>
+            props.localteam_batting_score.map((data, index) => {
+              return (
+                data.fow_balls > 0 && (
+                  <div
+                    className="px-[10px] my-[10px] flex flex-col"
+                    key={index}
+                  >
+                    <div className="flex justify-between  w-[100%] items-center">
+                      <div>
+                        <span className="text-[rgb(0,129,255)] text-[14px]">
+                          {data.batsman.fullname}
+                        </span>
                       </div>
-                    )
-                  );
-                })}
-
+                      <div className="flex  gap-x-[92px] text-[grey]  mr-[39px]">
+                        <span className=" min-w-[60px]">{data.fow_score}</span>
+                        <span className=" w-[60px]">{data.fow_balls}</span>
+                      </div>
+                    </div>
+                  </div>
+                )
+              );
+            })}
         </div>
       </div>
     </div>
