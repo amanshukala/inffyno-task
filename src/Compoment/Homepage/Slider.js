@@ -22,13 +22,13 @@ const Slider = (props) => {
 
   const apiData = crickets?.data?.data.slice(2, 21);
 
-  const livestatus = crickets?.data?.data.filter((mData) => {
+  const liveStatus = crickets?.data?.data.filter((mData) => {
     if (!mData.live) {
       return mData;
     }
   });
 
-  const upstatus = crickets?.data?.data.filter((mData) => {
+  const upStatus = crickets?.data?.data.filter((mData) => {
     if (mData.status === "Aban.") {
       return mData;
     }
@@ -55,8 +55,8 @@ const Slider = (props) => {
       ) : (
         <div>
           <SliderCard type="Update Matchhes" data_card={apiData} />
-          <SliderCard type="Finished of Matched" data_card={livestatus} />
-          <SliderCard type="Upcoming Matchhes" data_card={upstatus} />
+          <SliderCard type="Finished of Matched" data_card={liveStatus} />
+          <SliderCard type="Upcoming Matchhes" data_card={upStatus} />
         </div>
       )}
     </div>
@@ -91,18 +91,18 @@ export default Slider;
 //       setApiData(data.data.splice(2,21))
 //     }
 
-//     const livestatus =data.data.filter((mData) => {
+//     const liveStatus =data.data.filter((mData) => {
 //         if(!mData.live){
 //           return mData
 //       }
 //   })
-//    setLive_Data(livestatus);
+//    setLive_Data(liveStatusS;
 
 //    const upstatus =data.data.filter((mData) => {
 //     if(mData.status ==="Aban."){
 //       return mData
 //     }
-//   })
+//  S})
 //   setUpcoming_Data(upstatus)
 
 //   }
