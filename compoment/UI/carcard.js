@@ -20,7 +20,7 @@ const Carcard = ({ setShowModal }) => {
   
 
  
-
+  
 
 
   return (

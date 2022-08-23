@@ -3,26 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div className=" max-w-[1440px] mx-auto ">
-      <div className=" mr-[172px] w-[760px] ml-[508px] mt-[134px] flex items-end flex-col gap-y-[12px] mt-[40px]">
-        
-        <p className="text-[28px] w-[100%] text-center font-bold text-[#28293D]">
-          Why Autodigg?
-        </p>
-
-        <p
-          className="text-[#8F90A6]   text-[14px] font-bold 
-      max-w-[760px]  leading-[20px] whitespace-pre-wrap"
-        >
-          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-          sint. Velit officia consequat duis enim velit mollit. Exercitation
-          veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
-          ullamco est sit aliqua dolor do amet sint. Velit officia consequat
-          duis enim velit mollit. Exercitation veniam consequat sunt nostrud
-          amet.
-        </p>
-    
-        
-      </div>
+      
       <div className="bg-[#28293D] ">
         <div className=" ml-[64px] mr-[60px] mt-[64px]    ">
           <div className=" pt-[64px] pb-[36px] flex justify-between ">

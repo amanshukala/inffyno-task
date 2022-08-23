@@ -1,12 +1,42 @@
-import React from "react";
+import React , {useState} from "react";
 import Accordian from "./accordian";
 import Checkbox from "./checkbox";
 import Showmodel from './showmodel';
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../../redux/carslices";
+import SingleRange from "./singlerange";
+import MultiRange from "./multirange";
+import DetailDropDown from "./detaildropdown";
 const CarFilter = () => {
+
+  const [sRange ,setSRange] = useState([100]);
+  const [dRange ,setDRange] = useState([0, 1000000]);
+  const [yRange ,setYRange] = useState([2011,2021]);
+
+
+
+
+  const dispatch = useDispatch()
+
+  const {carmake , carmodel,carStyle ,carEcolur ,carIcolur ,carTrans ,carDrive ,carFuel ,carFeature} = useSelector((state) => ({
+    carmake: state.users.carmake,
+    carmodel: state.users.carmodel,
+    carStyle: state.users.carStyle,
+    carEcolur: state.users.carEcolur,
+    carIcolur: state.users.carIcolur,
+    carTrans: state.users.carTrans,
+    carDrive: state.users.carDrive,
+    carFuel: state.users.carFuel,
+    carFeature: state.users.carFeature,
+  }));
+
+  // console.log( "carFeatur", Object.entries(carFeature)[0][1]['Exterior Features'])
+  
+  const tittle =(Object.keys(  Object.entries(carFeature)[0][1]))
+  console.log(tittle)
+
   return (
-    <div className="text-[black] rounded-[10px]  border-[1px] border-solid border-[#F2F2F5] w-[312px]  text-center pt-[23px] ">
+    <div className="text-[black] bg-[#FFFFFF] rounded-[10px]  border-[1px] border-solid border-[#F2F2F5] w-[312px]  text-center pt-[23px] ">
       <div className="bg-[#FFFFFF]">
         <div className="pt-[16px] pl-[16px] flex flex-col gap-y-[8px] ">
           <p className="text-[#28293D] font-[700] text-[16px] w-max	">
@@ -57,7 +87,7 @@ const CarFilter = () => {
           </p>
           <div className="w-[280px] h-[48px] flex flex-col justify-center px-[16px] border-[1px] rounded-[10px] border-[#E4E4EB] bg-[#FFFFFF]">
             <p className="flex justify-between items-center">
-              78613{" "}
+              78613
               <img
                 src="/buttonae.svg"
                 alt="aerro"
@@ -73,10 +103,15 @@ const CarFilter = () => {
             Search within
           </p>
           <p className="text-[#28293D] text-[12px] font-[600] max-w">
-            100 miles
+          {sRange} miles
           </p>
         </div>
-        <div className="bg-[#EBEBF0] mt-[18px] w-[280px] h-[6px] rounded-[10px] mx-[16px]"></div>
+
+      
+
+        <div className=" mt-[18px] w-[280px] h-[6px] rounded-[10px] mx-[16px]">
+                <SingleRange setRange={setSRange} min={20} max={500} step={10} defaultValue={100} />
+          </div> 
 
         <div className="flex justify-between mx-[16px] mt-[15px]">
           <p className="text-[#28293D] text-[12px] font-[500] max-w">
@@ -88,92 +123,17 @@ const CarFilter = () => {
         </div>
 
         <div className="bg-[#E4E4EB] mx-[16px] w-[280px] h-[1px] mt-[16px] rounded-[10px] "></div>
-        <Checkbox />
+        <Checkbox  carmake={carmake}/>
 
-        <div className="pl-[16px] flex flex-col gap-y-[8px] mt-[16px]">
-          <p className="text-[#8F90A6] text-[12px] font-[600]   w-fit ">
-            Modal
-          </p>
-
-          <div className="mt-[14px] flex flex-col gap-y-[16px]">
-            <div className="flex item-center gap-x-[10px]">
-              <input
-                type="checkbox"
-                id="ILX"
-                name="ILX"
-                value="ILX"
-                className="h-[20px] w-[20px] accent-black rounded-[10px] border-[1px] border-[#F2F2F5]"
-              />
-              <label className="text-[14px] font-[500] text-[#28293D]">
-                {" "}
-                ILX (7)
-              </label>
-            </div>
-
-            <div className="flex  gap-x-[10px] item-center">
-              <input
-                type="checkbox"
-                id="MDX"
-                name="MDX"
-                value="MDX"
-                className="h-[20px] w-[20px] accent-black rounded-[10px] border-[1px] border-[#F2F2F5]"
-              />
-              <label className="text-[14px] font-[500] text-[#28293D]">
-                MDX (33)
-              </label>
-            </div>
-
-            <div className="flex  gap-x-[10px] item-center">
-              <input
-                type="checkbox"
-                id="RDX"
-                name="RDX "
-                value="RDX "
-                className="h-[20px] w-[20px] accent-black rounded-[10px] border-[1px] border-[#F2F2F5]"
-              />
-              <label className="text-[14px] font-[500] text-[#28293D]">
-                {" "}
-                RDX (45)
-              </label>
-            </div>
-
-            <div className="flex  gap-x-[10px] item-center">
-              <input
-                type="checkbox"
-                id="TL"
-                name="TL"
-                value="TL"
-                className="h-[20px] w-[20px] accent-black rounded-[10px] border-[1px] border-[#F2F2F5]"
-              />
-              <label className="text-[14px] font-[500] text-[#28293D]">
-                {" "}
-                TL (2)
-              </label>
-            </div>
-
-            <div className="flex  gap-x-[10px] item-center">
-              <input
-                type="checkbox"
-                id="used"
-                name="TLX"
-                value="TLX"
-                className="h-[20px] w-[20px] accent-black rounded-[10px] border-[1px] border-[#F2F2F5]"
-              />
-              <label className="text-[14px] font-[500] text-[#28293D]">
-                {" "}
-                TLX (21)
-              </label>
-            </div>
-          </div>
-        </div>
+        
 
         <div>
 
-          <Showmodel />
+          <Showmodel  carmodel={carmodel}/>
 
         </div>
-        <div className="bg-[#E4E4EB] mx-[16px] w-[280px] h-[1px] mt-[18px] rounded-[10px] "></div>
-
+        {/* <div className="bg-[#E4E4EB] mx-[16px] w-[280px] h-[1px] mt-[18px] rounded-[10px] "></div> */}
+{/* 
         <div className="pl-[16px] flex flex-col gap-y-[8px] mt-[16px]">
           <p className="text-[#8F90A6] text-[12px] font-[600]   w-fit ">
             Body type
@@ -207,36 +167,60 @@ const CarFilter = () => {
               </label>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="bg-[#E4E4EB] mx-[16px] w-[280px] h-[1px] mt-[18px] rounded-[10px] "></div>
 
         <div className="flex justify-between mx-[16px] mt-[20px]">
           <p className="text-[#8F90A6] text-[12px] font-[600] max-w">Price</p>
           <p className="text-[#28293D] text-[16px] font-[700] max-w">
-            $0 - $1,000
+              ${dRange[0]} - ${dRange[dRange.length-1]}
           </p>
         </div>
-        <div className="bg-[#EBEBF0] mt-[18px] w-[280px] h-[6px] rounded-[10px] mx-[16px]"></div>
+        <div  className=" mt-[18px] w-[280px] h-[6px] rounded-[10px] mx-[16px]">
+            <MultiRange setRange={setDRange} defaultValue={[0,1000000]} min={0} max={100000} step={1000} />
+        </div>
+         <div className="flex justify-between mx-[16px] mt-[15px]">
+                  <p className='font-[500] text-[12px] leading-[16px] text-[#28293D]'>$0</p>
+                  <p className='font-[500] text-[12px] leading-[16px] text-[#28293D]'>$100,000</p>
+                </div>
+        <div className="bg-[#E4E4EB] mx-[16px] w-[280px] h-[1px] mt-[18px] rounded-[10px] "></div>
 
         <div className="flex justify-between mx-[16px] mt-[20px]">
           <p className="text-[#8F90A6] text-[12px] font-[600] max-w">
             Make year
           </p>
           <p className="text-[#28293D] text-[16px] font-[700] max-w">
-            2000 - 2010
+          {yRange[0]} - {yRange[yRange.length-1]}
           </p>
         </div>
-        <div className="bg-[#EBEBF0] mt-[18px] w-[280px] h-[6px] rounded-[10px] mx-[16px]"></div>
-
-        <div className="flex justify-between mx-[16px] mt-[20px]">
-          <p className="text-[#8F90A6] text-[12px] font-[600] max-w">Mileage</p>
-          <p className="text-[#28293D] text-[16px] font-[700] max-w">Any</p>
+        
+        <div  className=" mt-[18px] w-[280px] h-[6px] rounded-[10px] mx-[16px]">
+            <MultiRange setRange={setYRange} defaultValue={[2011,2021]} min={1990} max={2021} step={1}  />
         </div>
-        <div className="bg-[#EBEBF0] mt-[18px] w-[280px] h-[6px] rounded-[10px] mx-[16px]"></div>
 
-        <div className="bg-[#E4E4EB] mx-[16px] w-[280px] h-[1px] mt-[32px] rounded-[10px] "></div>
-
-        <Accordian />
+        <div className="flex justify-between mx-[16px] mt-[15px]">
+                  <p className='font-[500] text-[12px] leading-[16px] text-[#28293D]'>1990</p>
+                  <p className='font-[500] text-[12px] leading-[16px] text-[#28293D]'>2021</p>
+        </div>
+        <div className = "mt-[15px]">
+    
+         
+         <section className=' flex flex-col py-[10px] '>
+                <section className=' '>
+                    <DetailDropDown dropDownTitle="Style" title1="BODY STYLE" data1={carStyle} title2="EXTERIOR COLOR"  data2={carEcolur} title3="INTERIOR COLOR" data3={carIcolur} />
+                </section>                                               
+                <section className=' '>
+                    <DetailDropDown dropDownTitle="Performance" title1="TRANSMISSION" data1={carTrans} title2="DRIVE TRAIN"  data2={carDrive} title3="FUEL TYPE" data3={carFuel} />
+                </section>
+                <section className=' '>
+                    <DetailDropDown dropDownTitle="Features" ftitle1={tittle[0] } fdata1={Object.entries(carFeature)[0][1]["Exterior Features"]} ftitle2={tittle[1] }  fdata2={Object.entries(carFeature)[0][1]["Technology Features"]} ftitle3={tittle[2] } fdata3={Object.entries(carFeature)[0][1]["Safety Features"]}  title4={tittle[3] } data4={Object.entries(carFeature)[0][1]["Exterior Features"]} title5={tittle[4] }  data5={Object.entries(carFeature)[0][1]["Others"]} />
+                </section>
+                <section className=' '>
+                    <DetailDropDown dropDownTitle="Ratings" />
+                </section> 
+              </section>
+        </div>
+       
       </div>
 
     

@@ -4,6 +4,8 @@ const Cardetail = () => {
 
   const router =useRouter()
 
+  console .log("router",router)
+
   return (
     <div className=" max-w-[1440px] mx-auto mt-[36px] ">
       <div className="mx-[60px] flex justify-between">

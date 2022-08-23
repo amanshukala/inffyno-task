@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
 const Carcarditem = ({ setShowModal, carData }) => {
 
-  const expolorLink = `/carid`;
+  // const expolorLink = `/cardetails`;
   const handleButtonClick = useCallback((e) => {
     e.stopPropagation();
 
@@ -12,27 +12,30 @@ const Carcarditem = ({ setShowModal, carData }) => {
     setShowModal(true);
   }, []);
 
-  console.log(carData[0])
+  
 
   return (
     <div className = "flex flex-col gap-y-[23px]">
       {carData && carData[0].map((car,key) => {
-        console.log(car.car_offers)
+        console.log("cardetails" , car.car_id)
         return (
         
           <div key={car.id} className ="  rounded-[10px] shadow-cardshadow">
-            <a href={expolorLink} target="_blank" rel="noreferrer">
+            <a href={`cardetails-${car.car_id}`  } target="_blank" rel="noreferrer">
               <div>
                 <div className="flex gap-y-[24px]">
-                  <img
+                  <div>
+                  <Image
                     src={car?.photos[0]}
                     height={254}
                     alt="car"
                     width={360}
                     className="rounded-tl-[10px]"
                   />
+                  </div>
+                 
                   <div className="flex flex-col justify-between my-[24px] w-[100%] ">
-                    <div className="flex flex-col  gap-y-[4px] ">
+                    <div className="flex flex-col  gap-y-[4px] pl-[15px] ">
                       <p className="font-[700] text-[20px] text-[#28293D] leading-[32px]">
                         {car.year} {car.make} {car.model}
                       </p>
@@ -45,7 +48,7 @@ const Carcarditem = ({ setShowModal, carData }) => {
                       </p>
                     </div>
                     <div className="flex w-[100%] justify-between ">
-                      <div className="flex gap-x-[8px] items-center">
+                      <div className="flex gap-x-[8px] items-center pl-[15px]">
                         <p className=" text-[28px] font-bold text-[#28293D]">
                             ${car.price.toLocaleString('en-US')}
 
@@ -61,7 +64,7 @@ const Carcarditem = ({ setShowModal, carData }) => {
                             flex justify-center rounded-[10px] mr-[24px] text-[#FFFFFF]
                             text-[14px] items-center h-[36px] w-[137px] "
                         >
-                          Invite dealer ss
+                          Invite dealer 
                           <span className="mt-[8px]">
                             <img
                               src="/buttonae.svg"
