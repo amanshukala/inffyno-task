@@ -1,4 +1,6 @@
 import { Fragment, useState } from "react";
+import Image from "next/image"
+
 import {
   Accordion,
   AccordionHeader,
@@ -31,7 +33,6 @@ const Accordian = () => {
       [value.type]:value.isOpen,
     }));
   };
-  console .log('open',open)
   return (
     <Fragment>
       <div className="mx-[16px] pt-[15px] ">
@@ -111,11 +112,11 @@ const Accordian = () => {
                   className="h-[20px] w-[20px]  accent-black rounded-[10px] border-[1px] border-[#F2F2F5]"
                 />
                 <label className="text-[14px]  font-[500] flex gap-x-[4px] text-[#28293D]">
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
                   <span className="text-[#28293D] tex-[14px]"> only </span>
                 </label>
               </div>
@@ -129,10 +130,10 @@ const Accordian = () => {
                   className="h-[20px]  w-[20px] accent-black rounded-[10px] border-[1px] border-[#F2F2F5]"
                 />
                 <label className="text-[14px]  flex font-[500]  gap-x-[4px] text-[#28293D]">
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
                   and above
                 </label>
               </div>
@@ -146,9 +147,9 @@ const Accordian = () => {
                   className="h-[20px] w-[20px]  accent-black rounded-[10px] border-[1px] border-[#F2F2F5]"
                 />
                 <label className="text-[14px] font-[500] flex gap-x-[4px] text-[#28293D]">
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
                   and above
                 </label>
               </div>
@@ -162,8 +163,8 @@ const Accordian = () => {
                   className="h-[20px] w-[20px] accent-black rounded-[10px]  border-[1px] border-[#F2F2F5]"
                 />
                 <label className="text-[14px]  flex gap-x-[4px] font-[500] text-[#28293D]">
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
                   and above
                 </label>
               </div>
@@ -177,7 +178,7 @@ const Accordian = () => {
                   className="h-[20px] w-[20px] accent-black rounded-[10px] border-[1px] border-[#F2F2F5]"
                 />
                 <label className="text-[14px] flex gap-x-[4px] font-[500] text-[#28293D]">
-                  <img src="/fstar.svg" alt="aerro" height={20} width={15} />
+                  <Image src="/fstar.svg" alt="aerro" height={20} width={15} />
                   and above
                 </label>
               </div>
@@ -210,27 +211,3 @@ const Accordian = () => {
 };
 export default Accordian;
 
-{
-  /* 
-<div className="bg-[#E4E4EB] mx-[16px] w-[280px] h-[1px] mt-[16px] rounded-[10px] "></div>
-
-
-
-
-<div className="mx-[16px] pt-[15px] flex justify-between">
-<p className="font-[700] text-[16px] text-[#28293D]">Rating</p>
-
-<img src="/closedrop.svg" alt="aerro" height={20} width={15} />
-</div>
-
-
-
-
-<div className="bg-[#E4E4EB] mx-[16px] w-[280px] h-[1px] mt-[16px] rounded-[10px] "></div>
-
-<div className="mx-[16px] pt-[15px] flex justify-between pb-[24px]">
-  <p className="font-[700] text-[16px] text-[#28293D]">Contactless service</p>
-<img src="/closedrop.svg" alt="aerro" height={20} width={15} />
-</div>
- */
-}

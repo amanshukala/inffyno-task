@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import Modal from "./modal";
-import Carcard from "./UI/carcard";
-import CarFilter from "./UI/carfilter";
+import Modal from "../Modal/Modal";
+import Carcard from "../CarCard/CarCard";
+import CarFilter from "../CarFilter/CarFilter";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser } from "../redux/carslices";
-import Pagination from "./UI/pagination";
+import Pagination from "../CarFilter/Pagination";
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const {  count } = useSelector((state) => state.HomePageSlice)
 
-  const { count } = useSelector((state) => ({
-    count: state.users.count,
-  }));
+
 
   return (
     <div className="  bg-[#FAFAFC] px-[64px]">
@@ -26,7 +24,8 @@ const Home = () => {
               className="text-[#28293D] font-bold
                     text-[32px] "
             >
-              Showing {count[0]?.count} cars
+        
+              Showing {count} cars
             </p>
           </div>
           <div>
@@ -40,9 +39,11 @@ const Home = () => {
         </div>
         <div className="mt-[36px]  flex gap-x-[24px] index-0 ">
           <div>
+            
             <CarFilter />
           </div>
           <div className=" w-[984px] h-max">
+        
             <Carcard setShowModal={setShowModal} />
 
             <Pagination />

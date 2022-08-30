@@ -1,20 +1,25 @@
-import { useEffect, useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { paginatedValue , fetchCars , } from "../../../redux/carslices";
 import ReactPaginate from 'react-paginate';  
+import { useDispatch, useSelector } from "react-redux";
 
-const pagination = () => {
-  const [pageCount, setpageCount] = useState(58);
+const Pagination = () => {
+  const dispatch= useDispatch()
+
+  const ddd = useSelector((state) => state.HomePageSlice)
+
+  const {  count  } = useSelector((state) => state.HomePageSlice)
 
   
-  const handlePageClick = async (data) => {
-    console.log(data.selected);
-
-  };
-
+  const handlePageClick = async(e)=>{
+    dispatch(paginatedValue(e.selected+1))
+    dispatch(fetchCars({...ddd, page: e.selected + 1}))
+}
+ 
   return (
     <div>
        <ReactPaginate  
-        pageCount={pageCount}
+        pageCount={Math.ceil(count/20)}
         marginPagesDisplayed={1}
         pageRangeDisplayed={5}
         onPageChange={handlePageClick} 
@@ -26,7 +31,7 @@ const pagination = () => {
         
         pageLinkClassName= {"font-[500] text-[14px] text-[#555770]"}
 
-        previousClassName={"bg-[#8F90A6] hover:bg-blue flex items-center justify-center w-[36px]  rounded-[6px] h-[36px] border-[1px] border-solid border-[#E4E4EB]"}
+        previousClassName={" hover:bg-blue flex items-center justify-center w-[36px]  rounded-[6px] h-[36px] border-[1px] border-solid border-[#E4E4EB]"}
         previousLinkClassName={""}
         nextClassName={"bg-black flex items-center justify-center w-[36px]  rounded-[6px] h-[36px] border-[1px] border-solid text-[white] border-[#E4E4EB]"}
         nextLinkClassName={""}
@@ -40,7 +45,7 @@ const pagination = () => {
   )
 }
 
-export default pagination;
+export default Pagination;
 
 
 

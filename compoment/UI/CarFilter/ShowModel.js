@@ -1,10 +1,54 @@
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import {  selectedDrop ,fetchCars  } from "../../../redux/carslices";
+import { useDispatch, useSelector } from "react-redux";
 
 const Showmodel = ({ carmodel }) => {
   const [dropDown, setDropDown] = useState(false);
 
-  console.log(Object.entries(carmodel[0]).splice(7,251))
+
+
+
+  
+  const dispatch= useDispatch()
+
+  
+
+  const ddd = useSelector((state) => state.HomePageSlice);
+
+  const { model ,model_drop} = useSelector((state) => state.HomePageSlice)
+  
+
+  const handleChange = (e) => {
+
+   
+    const { value, checked } = e.target;
+
+    console.log(value)
+
+
+    if (checked) {
+      dispatch(selectedDrop({model_drop: [...model_drop, value]}))
+
+      dispatch(fetchCars({...ddd, model_drop : [...model_drop, value]}))
+
+      
+    }
+  
+    else {
+      dispatch(selectedDrop( { model_drop : model_drop.filter((e) => e !== value)}))
+      
+
+      dispatch(fetchCars({...ddd, model_drop : model_drop.filter((e) => e !== value)}))
+
+
+
+
+    }
+
+  }
+
+
 
   return (
     <div>
@@ -20,13 +64,15 @@ const Showmodel = ({ carmodel }) => {
         <section
           className={"flex flex-col gap-[21px] "}>
           {carmodel &&
-            Object.entries(carmodel[0]).splice(0,6).map(([model, total]) => {
+            Object.entries(carmodel)?.splice(0,6)?.map(([model, total]) => {
               return (
                 <>
                   <div className="flex gap-[10px]">
                     <input
                       type="checkbox"
                       className="bg-[#FFFFFF] h-[20px] w-[20px] accent-[#28293D] border-[2px] border-solid border-[#8F90A6] rounded-[4px]  "
+                      value ={model}
+                      onChange ={handleChange}
                     />
                     <label className="font-[500] text-[14px] leading-[20px] text-[#28293D]">
                       {model} ({total.toString()})
@@ -48,13 +94,17 @@ const Showmodel = ({ carmodel }) => {
           } flex flex-col gap-[21px] overflow-hidden transition-all ease-in-out duration-200 `}
         >
           {carmodel &&
-            Object.entries(carmodel[0]).splice(7,251).map(([model, total]) => {
+            Object.entries(carmodel)?.splice(7,251)?.map(([model, total]) => {
               return (
                 <>
                   <div className="flex gap-[10px]">
                     <input
                       type="checkbox"
                       className="bg-[#FFFFFF] h-[20px] w-[20px] accent-[#28293D] border-[2px] border-solid border-[#8F90A6] rounded-[4px]  "
+                      onChange={handleChange}
+                      value ={model}
+                      
+
                     />
                     <label className="font-[500] text-[14px] leading-[20px] text-[#28293D]">
                       {model} ({total.toString()})

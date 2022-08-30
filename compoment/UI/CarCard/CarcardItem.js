@@ -1,9 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+
 const Carcarditem = ({ setShowModal, carData }) => {
 
-  // const expolorLink = `/cardetails`;
+
   const handleButtonClick = useCallback((e) => {
     e.stopPropagation();
 
@@ -12,26 +14,46 @@ const Carcarditem = ({ setShowModal, carData }) => {
     setShowModal(true);
   }, []);
 
-  
+  const dispatch = useDispatch()
+  const { isLoading} = useSelector((state) => state.HomePageSlice)
+
+  console.log("isloading",isLoading)
+
+ 
 
   return (
-    <div className = "flex flex-col gap-y-[23px]">
-      {carData && carData[0].map((car,key) => {
-        console.log("cardetails" , car.car_id)
+    <div className =  "flex flex-col gap-y-[23px]">
+      {carData && carData?.map((car,key) => {
+        
+        
         return (
         
-          <div key={car.id} className ="  rounded-[10px] shadow-cardshadow">
-            <a href={`cardetails-${car.car_id}`  } target="_blank" rel="noreferrer">
+          <div key={car?.vin}  className ="  rounded-[10px] shadow-cardshadow">
+            <Link href={`${car?.vin}`  }>
+              <a  target="_blank" rel="noreferrer">
+            
+          
               <div>
                 <div className="flex gap-y-[24px]">
-                  <div>
-                  <Image
-                    src={car?.photos[0]}
-                    height={254}
-                    alt="car"
-                    width={360}
-                    className="rounded-tl-[10px]"
-                  />
+                  <div className = {"max-w-[360px] w-full h-auto  max-h-[254px]" }>
+                    {car.photos &&<Image
+                                          src={car.photos[0]}
+                                          height={254}
+                                          layout= "responsive"
+                                          alt="car"
+                                          width={360}
+                                          className="rounded-tl-[10px]"
+                                                    />}
+
+                  {(car.has_photos == "N") &&   <Image
+                                                      src="/car.jpg"
+                                                      height={254}
+                                                      layout= "responsive"
+                                                      alt="car"
+                                                      width={360}
+                                                      className="rounded-tl-[10px]"
+                                                    />}
+                
                   </div>
                  
                   <div className="flex flex-col justify-between my-[24px] w-[100%] ">
@@ -54,7 +76,7 @@ const Carcarditem = ({ setShowModal, carData }) => {
 
                         </p>
                         
-                          <img src="/ro.svg" alt="ro" height={16} width={16} />
+                          <Image src="/ro.svg" alt="ro" height={16} width={16} />
                         
                       </div>
                       <div className="">
@@ -66,7 +88,7 @@ const Carcarditem = ({ setShowModal, carData }) => {
                         >
                           Invite dealer 
                           <span className="mt-[8px]">
-                            <img
+                            <Image
                               src="/buttonae.svg"
                               alt="aerro"
                               height={24}
@@ -81,7 +103,7 @@ const Carcarditem = ({ setShowModal, carData }) => {
                 <div className="bg-[#FFF8E6]">
                   <div className="py-[16px] ml-[24px]">
                     <p className="flex gap-x-[4px]">
-                      <img
+                      <Image
                         src="/imgstar.svg"
                         alt="star"
                         height={20}
@@ -93,15 +115,16 @@ const Carcarditem = ({ setShowModal, carData }) => {
                     </p>
 
                     <p className="text-[#28293D] font-[400] font-[14px] ">
-                    • {car.car_offers.split(",")[0].replace(/[\[\]'"]/g, '')}
+                    • {car.car_offers && car?.car_offers ?.split(",")[0].replace(/[\[\]'"]/g, '')}
                       <sapn className="ml-[16px]">
-                      • {car.car_offers.split(",")[1].replace(/[\[\]'"]/g, '')}
+                      • {car.car_offers && car?.car_offers?.split(",")[1].replace(/[\[\]'"]/g, '')}
                       </sapn>
                     </p>
                   </div>
                 </div>
               </div>
-            </a>
+              </a>
+            </Link>
           </div>
         );
       })}

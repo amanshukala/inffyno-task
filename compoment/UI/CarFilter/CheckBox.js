@@ -9,9 +9,7 @@ export default function Checkbox ({carmake}) {
   const [selectedPersons, setSelectedPersons] = useState([]);
   const [dropDown, setDropDown] = useState(false);
 
-  const people = Object.keys(carmake[0])
-
-  console.log("peplee" ,people)
+  const people = Object.keys(carmake)
 
   const ref = useRef();
 
@@ -86,7 +84,7 @@ export default function Checkbox ({carmake}) {
                   className="absolute mt-1 w-full rounded-md bg-white shadow-lg"
                   onClick={() => setIsOpen(!isOpen)}
                   ref={ref}
-                >
+                  >
                   <Listbox.Options
                     static
                     className="absolute top-[-60px] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white  text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
@@ -125,11 +123,7 @@ export default function Checkbox ({carmake}) {
                     })}
                   </Listbox.Options>
                 </Transition>
-                {/* <div className="pt-1 text-sm">
-                  {selectedPersons.length > 0 && (
-                    <>Selected persons: {selectedPersons.join(", ")}</>
-                  )}
-                </div> */}
+            
               </div>
             </>
           )}

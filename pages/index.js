@@ -1,7 +1,8 @@
-import Home from "../compoment/home"
+import Home from "../compoment/UI/Home/Home"
 import { wrapper } from "../redux/store" 
 import axios from "axios";
-import { addUser, addCount,addCarMake, addCarModel ,addCarStyle , addCarEcolur ,addCarIcolur, addCarTrans ,addCarDrive,addCarFuel ,addCarFeature} from "../redux/carslices"
+import { getCars, getCount, getBodyType,getExteriorColor,getInteriorColor,getTransmission,getDriveTrain ,getFuelType ,getFeatures ,getMake ,getModel} from '../redux/carslices'
+
 
 
 
@@ -18,78 +19,54 @@ const index = () => {
 export default index
 
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
-  
-  
-  const response = await fetch("https://autodigg.com/ad-api/cars/list?car_type=Used+car%2CNew+car%2CCertified+pre-owned&page=1&radius=100&year=2011%2C2021&return=count")
-  const count = await response.json();
-  // console.log(count)
-  
-  store.dispatch(addCount(count))
+
+
+
+
+
+export const getServerSideProps = wrapper.getServerSideProps(
+   (store) => async (context) => {
+
+    const init_url = "https://autodigg.com/ad-api/cars/list?usedCar=false&car_type=Used+car&page=1&radius=100&year=2011,2021&zip=&price_from=0&price_to=100000";
+
+    const data = await axios.all([
+      axios.get(init_url),
+      axios.get(`${init_url}&return=count`),
+
+
+      axios.get(`${init_url}&return=body_type`),
+      axios.get(`${init_url}&return=exterior_color`),
+      axios.get(`${init_url}&return=interior_color`),
+      axios.get(`${init_url}&return=transmission`),
+      axios.get(`${init_url}&return=drivetrain`),
+      axios.get(`${init_url}&return=fuel_type`),
+      axios.get(`${init_url}&return=features`),
+
+      axios.get(`https://autodigg.com/ad-api/cars/list?return=make`),
+      axios.get(`https://autodigg.com/ad-api/cars/list?make=&return=model`),
+
+    ])
+
+    store.dispatch(getCars(data[0].data));
+    store.dispatch(getCount(data[1].data.count))
+
+    store.dispatch(getBodyType(data[2].data ? data[2].data : null))
+    store.dispatch(getExteriorColor(data[3].data))
+    
+    store.dispatch(getInteriorColor(data[4].data))
+    store.dispatch(getTransmission(data[5].data))
+    store.dispatch(getDriveTrain(data[6].data))
+    store.dispatch(getFuelType(data[7].data))
+    store.dispatch(getFeatures(data[8].data))
+
+    store.dispatch(getMake(data[9].data))
+    store.dispatch(getModel(data[10].data))
 
 
   
-  const allcarData= await fetch(`https://autodigg.com/ad-api/cars/list?usedCar=true&car_type=Used+car&page=1&radius=100`);
-  
-  const data = await  allcarData.json();
-  
-  
-  store.dispatch(addUser(data))
+    }
 
+    
+)
 
-
-  
-  const allCarsMakeRes = await axios.get("https://autodigg.com/ad-api/cars/list?return=make")
-  const carMake = await allCarsMakeRes.data
-
-  store.dispatch(addCarMake(carMake))
-
-  const allCarsModelRes = await axios.get("https://autodigg.com/ad-api/cars/list?make=&return=model")
-  const carModel = await allCarsModelRes.data
-
-  store.dispatch(addCarModel(carModel))
-
-
-
-
-  
-
-  const allCarsBTypeRes = await axios.get("https://autodigg.com/ad-api/cars/list?make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011%2C2021&zip=&return=body_type")
-  const carStyle = await allCarsBTypeRes.data
-  store.dispatch(addCarStyle(carStyle))
-
-  const allCarsEcolourRes = await axios.get("https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011%2C2021&zip=&return=exterior_color")
-  const carEcolur = await allCarsEcolourRes.data
-  store.dispatch(addCarEcolur(carEcolur))
-
-  const allCarsIcolourRes = await axios.get("https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011%2C2021&zip=&return=interior_color")
-  const carIcolur = await allCarsIcolourRes.data
-  store.dispatch(addCarIcolur(carIcolur))
-
-
-
-
-  const allCarsTransRes = await axios.get("https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011%2C2021&zip=&return=transmission")
-  const carTrans = await allCarsTransRes.data
-  store.dispatch(addCarTrans(carTrans))
-
-  const allCarsDriveTrainRes = await axios.get("https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011%2C2021&zip=&return=drivetrain")
-  const carDrive = await allCarsDriveTrainRes.data
-  store.dispatch(addCarDrive(carDrive))
-
-  const allCarsFuleTRes = await axios.get("https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011%2C2021&zip=&return=fuel_type")
-  const carFuel = await allCarsFuleTRes.data
-  store.dispatch(addCarFuel(carFuel))
-
-  
-  
-  
-  const allCarsFeaturesRes = await axios.get("https://autodigg.com/ad-api/cars/list?body_type=&make=&model=&usedCar=true&car_type=Used+car&page=1&radius=100&year=2011%2C2021&zip=&return=features")
-  const carFeature = await allCarsFeaturesRes.data
-  store.dispatch(addCarFeature(carFeature))
-
-  
-
-
-});
 
