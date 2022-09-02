@@ -24,7 +24,6 @@ const Showmodel = ({ carmodel }) => {
    
     const { value, checked } = e.target;
 
-    console.log(value)
 
 
     if (checked) {

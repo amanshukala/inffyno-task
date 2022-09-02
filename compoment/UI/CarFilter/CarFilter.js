@@ -14,7 +14,7 @@ import {  selectedDrop ,fetchCars  } from "../../../redux/carslices";
 const CarFilter = () => {
 
   const [sRange ,setSRange] = useState([100]);
-  const [dRange ,setDRange] = useState([0, 1000000]);
+  // const [dRange ,setDRange] = useState([0, 1000000]);
   const [yRange ,setYRange] = useState([2011,2021]);
 
   const dispatch= useDispatch()
@@ -24,9 +24,26 @@ const CarFilter = () => {
 
   const ddd = useSelector((state) => state.HomePageSlice);
 
-  const {   make ,model ,bodyType,exteriorColor,interiorColor,driveTrain,transmission,fuelType,features ,selected_drop} = useSelector((state) => state.HomePageSlice)
-  console.log(exteriorColor)
+  const {   make ,model ,bodyType,exteriorColor,interiorColor,driveTrain,transmission,fuelType,features ,selected_drop ,priceRange ,yearRange} = useSelector((state) => state.HomePageSlice)
+  
   const tittle =(Object.keys(  Object.entries(features)[0][1]))
+
+
+  const OnYearChange =(e)=>{
+    dispatch(selectedDrop({yearRange: e}))
+
+    dispatch(fetchCars({ ...ddd , yearRange: e}))
+
+
+  }
+
+
+  const OnRangeChange =(e)=>{
+    dispatch(selectedDrop({priceRange: e}))
+
+    dispatch(fetchCars({ ...ddd , priceRange: e}))
+}
+
 
   const handleChange = (e) => {
 
@@ -170,11 +187,12 @@ const CarFilter = () => {
         <div className="flex justify-between mx-[16px] mt-[20px]">
           <p className="text-[#8F90A6] text-[12px] font-[600] max-w">Price</p>
           <p className="text-[#28293D] text-[16px] font-[700] max-w">
-              ${dRange[0]} - ${dRange[dRange.length-1]}
+              ${priceRange[0]} - ${priceRange[priceRange.length-1]}
           </p>
         </div>
         <div  className=" mt-[18px] w-[280px] h-[6px] rounded-[10px] mx-[16px]">
-            <MultiRange setRange={setDRange} defaultValue={[0,1000000]} min={0} max={100000} step={1000} />
+
+            <MultiRange setRange={OnRangeChange} defaultValue={[0,1000000]} min={0} max={100000} step={1000} />
         </div>
          <div className="flex justify-between mx-[16px] mt-[15px]">
                   <p className='font-[500] text-[12px] leading-[16px] text-[#28293D]'>$0</p>
@@ -187,12 +205,13 @@ const CarFilter = () => {
             Make year
           </p>
           <p className="text-[#28293D] text-[16px] font-[700] max-w">
-          {yRange[0]} - {yRange[yRange.length-1]}
+          ${yearRange[0]} - ${yearRange[yearRange.length-1]}  
+      
           </p>
         </div>
         
         <div  className=" mt-[18px] w-[280px] h-[6px] rounded-[10px] mx-[16px]">
-            <MultiRange setRange={setYRange} defaultValue={[2011,2021]} min={1990} max={2021} step={1}  />
+            <MultiRange setRange={OnYearChange} defaultValue={[2011,2021]} min={1990} max={2021} step={1}  />
         </div>
 
         <div className="flex justify-between mx-[16px] mt-[15px]">

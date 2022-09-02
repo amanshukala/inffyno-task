@@ -17,7 +17,6 @@ const Carcarditem = ({ setShowModal, carData }) => {
   const dispatch = useDispatch()
   const { isLoading} = useSelector((state) => state.HomePageSlice)
 
-  console.log("isloading",isLoading)
 
  
 

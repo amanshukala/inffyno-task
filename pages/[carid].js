@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import axios from 'axios'
-import SingleDetail from '../compoment/UI/singledetail'
+import SingleDetail from '../compoment/UI/CarDetails/SingleDetail'
+// import CarDetail from './[CarId]';
+
 
 const CarDetail = ({carByVin}) => {
     const router =useRouter()

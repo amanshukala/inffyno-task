@@ -51,8 +51,8 @@ const DetailsDropDown = ({dropDownTitle,data1,data2,data3,data4,data5,title1,tit
    
     const { value, checked } = e.target;
 
-    console.log(value);
-    console.log("e.target.id",e.target.id);
+    // console.log(value);
+    // console.log("e.target.id",e.target.id);
 
 
     if (checked) {
