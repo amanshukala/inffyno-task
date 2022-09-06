@@ -4,7 +4,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 const GallarySlider = ({carByVin}) => {
 
-    const images = carByVin.photos.map((data) => {
+    const images = carByVin?.photos.map((data) => {
       return{  original : data ,
         thumbnail : data,
       }

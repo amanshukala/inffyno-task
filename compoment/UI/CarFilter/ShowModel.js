@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-import {  selectedDrop ,fetchCars  } from "../../../redux/carslices";
 import { useDispatch, useSelector } from "react-redux";
+import { setModelType,fetchCars } from "../../../Redux/CarSlices"
 
 const Showmodel = ({ carmodel }) => {
   const [dropDown, setDropDown] = useState(false);
@@ -12,11 +12,10 @@ const Showmodel = ({ carmodel }) => {
   
   const dispatch= useDispatch()
 
+  const {modelData}= useSelector((state) => state.homePageSlice);
   
 
-  const ddd = useSelector((state) => state.HomePageSlice);
 
-  const { model ,model_drop} = useSelector((state) => state.HomePageSlice)
   
 
   const handleChange = (e) => {
@@ -27,18 +26,17 @@ const Showmodel = ({ carmodel }) => {
 
 
     if (checked) {
-      dispatch(selectedDrop({model_drop: [...model_drop, value]}))
-
-      dispatch(fetchCars({...ddd, model_drop : [...model_drop, value]}))
+      dispatch(setModelType([...modelData, value]))
+      dispatch(fetchCars())
 
       
     }
   
     else {
-      dispatch(selectedDrop( { model_drop : model_drop.filter((e) => e !== value)}))
+      dispatch(setModelType(  modelData.filter((e) => e !== value)))
+      dispatch(fetchCars())
       
 
-      dispatch(fetchCars({...ddd, model_drop : model_drop.filter((e) => e !== value)}))
 
 
 

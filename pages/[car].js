@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import axios from 'axios'
-import SingleDetail from '../compoment/UI/CarDetails/SingleDetail'
-// import CarDetail from './[CarId]';
+import SingleDetail from './../compoment/UI/CarDetails/SingleDetail';
 
 
 const CarDetail = ({carByVin}) => {
@@ -12,8 +11,7 @@ const CarDetail = ({carByVin}) => {
 
   return (
       <div className='max-w-[1520px] mx-auto'>
-      
-        <SingleDetail carByVin={carByVin[0]}  />
+        <SingleDetail carByVin={carByVin}  />
       
     </div>
   )
@@ -22,16 +20,30 @@ const CarDetail = ({carByVin}) => {
 export default CarDetail;
 
 export async function getServerSideProps(context){
-  const {carId} = context.params;
+  const {car} = context.params;
+
   
-  const response = await axios.get(`https://autodigg.com/ad-api/cars/list?vin=${carId}`)
+  const response = await axios.get(`https://autodigg.com/ad-api/cars/list?vin=${car}`)
   
-  const carByVin = await response.data
+  const carByVin = await response.data[0]
   
 
-  return {
+   return {
     props:{
       carByVin : carByVin,
     },
   } 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

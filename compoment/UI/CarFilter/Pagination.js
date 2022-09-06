@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { paginatedValue , fetchCars , } from "../../../redux/carslices";
-import ReactPaginate from 'react-paginate';  
+import {paginatedValue ,fetchCars } from "../../../Redux/CarSlices"
+
+import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from "react-redux";
 
-const Pagination = () => {
+const Pagination = ({count}) => {
   const dispatch= useDispatch()
 
-  const ddd = useSelector((state) => state.HomePageSlice)
+  const ddd = useSelector((state) => state.homePageSlice)
 
-  const {  count  } = useSelector((state) => state.HomePageSlice)
 
   
-  const handlePageClick = async(e)=>{
+  const handlePageClick =(e)=>{
     dispatch(paginatedValue(e.selected+1))
-    dispatch(fetchCars({...ddd, page: e.selected + 1}))
+    dispatch(fetchCars())
+
 }
  
   return (

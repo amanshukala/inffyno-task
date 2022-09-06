@@ -1,5 +1,5 @@
-import React , {useState} from "react";
-import Accordian from "./accordian";
+import React , {useState ,useEffect} from "react";
+
 import Checkbox from "./CheckBox";
 import Showmodel from './ShowModel';
 import { useDispatch, useSelector } from "react-redux";
@@ -7,72 +7,120 @@ import SingleRange from "./SingleRange";
 import MultiRange from "./MultiRange";
 import DetailDropDown from "./DetailDropdown";
 import Image from "next/image";
-import {  selectedDrop ,fetchCars  } from "../../../redux/carslices";
+import { setNewUsed ,getCount,setYears,setPrice ,fetchCars,setRadius } from "../../../Redux/CarSlices"
+import { RiSendPlaneLine } from "react-icons/ri";
 
 
 
-const CarFilter = () => {
 
-  const [sRange ,setSRange] = useState([100]);
-  // const [dRange ,setDRange] = useState([0, 1000000]);
-  const [yRange ,setYRange] = useState([2011,2021]);
-
-  const dispatch= useDispatch()
-
-  // const [selected, setSelected] = useState([]);
+const CarFilter = ({carData ,setAllCars, setAllCount}) => {
   
 
-  const ddd = useSelector((state) => state.HomePageSlice);
+  //  const {makes ,models ,bodyType ,extColors ,intColors ,transmissions ,dtrains ,fuelType ,features} =carData
+   
+    const [allData, setAllData] = useState({
+     bodyTypes: carData.bodyType,
+     makes: carData.makes,
+     model: carData.models,
+     extColors: carData.extColors,
+     intColors: carData.intColors,
+     dtrains: carData.dTrain,
+     transmissions: carData.transmissions,
+     fuelType: carData.fuelType,
+     features: carData.features,
+ })
 
-  const {   make ,model ,bodyType,exteriorColor,interiorColor,driveTrain,transmission,fuelType,features ,selected_drop ,priceRange ,yearRange} = useSelector((state) => state.HomePageSlice)
+
+   const [sRange ,setSRange] = useState([100]);
+   const [dRange ,setDRange] = useState([0, 1000000]);
+   const [yRange ,setYRange] = useState([2011,2021]);
+
+   const dispatch= useDispatch()
+
+
+   const { cars ,count,newUsed,price,radius ,year,extcolors ,intcolors,dtrains,fuelType,models,bodytypes ,makes ,transmissions,features} = useSelector((state) => state.homePageSlice);
   
-  const tittle =(Object.keys(  Object.entries(features)[0][1]))
+  // const { cars ,count,newUsed,price,year} = useSelector((state) => state.homePageSlice);
+  
+   useEffect(() => {
+    count ? setAllCount(count) : ""
+     if (cars.length > 0 || count || bodytypes|| models || extcolors||intcolors||transmissions||fuelType || features) {
+         setAllCars(cars);
+         setAllData({
+
+           bodyTypes: bodytypes,
+
+           makes: carData.makes,
+
+           model: models,
+           extColors:extcolors,
+           intColors: intcolors,
+           dtrains: dtrains,
+          transmissions: transmissions,
+           fuelType: fuelType,
+           features: features,
+        
+         })
+   }}, [cars, count ])
+
+   const interiorFet = allData && Object.entries(allData.features)[0] && Object.entries(allData.features)[0][1] 
+    const techFet = allData && Object.entries(allData.features)[1]  && Object.entries(allData.features)[1][1] 
+    const safFet = allData && Object.entries(allData.features)[2] && Object.entries(allData.features)[2][1] 
+    const extFet = allData && Object.entries(allData.features)[3] && Object.entries(allData.features)[3][1] 
+    const others = allData && Object.entries(allData.features)[4] && Object.entries(allData.features)[4][1] 
 
 
-  const OnYearChange =(e)=>{
-    dispatch(selectedDrop({yearRange: e}))
+  // const {carTypes} = useSelector((state) => state.homePageSlice);
 
-    dispatch(fetchCars({ ...ddd , yearRange: e}))
+  // ddd.carTypes && console.log(ddd.carTypes)
+  // console.log(Object.keys(ddd)[3]);
 
+  // const { carTypes } = useSelector((state) => state.HomePageSlice)
+  
+  // const tittle =(Object.keys(  Object.entries(allData.features)[0][1]))
+  
+   const RadiusChange =(e)=>{
+    dispatch(setRadius(e))
+    dispatch(fetchCars())
 
   }
 
+   const OnYearChange =(e)=>{
+     dispatch(setYears(e))
+     dispatch(fetchCars())
+
+//     dispatch(fetchCars({ ...ddd , yearRange: e}))
+   }
+
 
   const OnRangeChange =(e)=>{
-    dispatch(selectedDrop({priceRange: e}))
+    dispatch(setPrice(e))
+    dispatch(fetchCars())
 
-    dispatch(fetchCars({ ...ddd , priceRange: e}))
+    // dispatch(fetchCars({ ...ddd , priceRange: e}))
+  
 }
 
 
   const handleChange = (e) => {
 
-    // dispatch(fetchCars())
-
-
-    // Destructuring
+     // Destructurin
     const { value, checked } = e.target;
 
     // Case 1 : The user checks the box
     if (checked) {
-      dispatch(selectedDrop( {selected_drop : [...selected_drop, value]}))
-
-      dispatch(fetchCars({...ddd, selected_drop : [...selected_drop, value]}))
+      dispatch(setNewUsed([...newUsed, value]))
+      dispatch(fetchCars())
 
     
     }
   
     // Case 2  : The user unchecks the box
     else {
-      dispatch(selectedDrop({ selected_drop: selected_drop.filter((e) => e !== value)}))
-      
+      dispatch(setNewUsed(newUsed.filter((e) => e !== value)))
+      dispatch(fetchCars())
 
-      dispatch(fetchCars({...ddd, selected_drop : selected_drop.filter((e) => e !== value)}))
-
-
-
-
-    }
+ }
 
   }
   
@@ -82,7 +130,7 @@ const CarFilter = () => {
 
   return (
     <div className="text-[black] bg-[#FFFFFF] rounded-[10px]  border-[1px] border-solid border-[#F2F2F5] w-[312px]  text-center pt-[23px] ">
-      <div className="bg-[#FFFFFF]">
+      <div className="bg-[#FFFFFF] relative">
         <div className="pt-[16px] pl-[16px] flex flex-col gap-y-[8px] ">
           <p className="text-[#28293D] font-[700] text-[16px] w-max	">
             Filter by
@@ -91,6 +139,8 @@ const CarFilter = () => {
         </div>
 
         <div className="gap-y-[14px] pl-[16px] mt-[24px] flex flex-col">
+
+
           <p className="text-[#8F90A6] uppercase text-[12px] w-max font-[600]">
             {" "}
             Car type
@@ -137,13 +187,10 @@ const CarFilter = () => {
           <div className="w-[280px] h-[48px] flex flex-col justify-center px-[16px] border-[1px] rounded-[10px] border-[#E4E4EB] bg-[#FFFFFF]">
             <p className="flex justify-between items-center">
               78613
-              <Image
-                src="/buttonae.svg"
-                alt="aerro"
-                height={20}
-                width={15}
-                className="bg-[#FF6B00] border-[1px] border-[#FF6B00] "
-              />
+
+            <RiSendPlaneLine size={20} fill="#FF6B00"></RiSendPlaneLine>
+
+              
             </p>
           </div>
         </div>
@@ -152,14 +199,14 @@ const CarFilter = () => {
             Search within
           </p>
           <p className="text-[#28293D] text-[12px] font-[600] max-w">
-          {sRange} miles
+          {radius} miles
           </p>
         </div>
 
       
 
         <div className=" mt-[18px] w-[280px] h-[6px] rounded-[10px] mx-[16px]">
-                <SingleRange setRange={setSRange} min={20} max={500} step={10} defaultValue={100} />
+                <SingleRange  setRange={RadiusChange} min={20} max={500} step={10} defaultValue={100} />
           </div> 
 
         <div className="flex justify-between mx-[16px] mt-[15px]">
@@ -172,13 +219,13 @@ const CarFilter = () => {
         </div>
 
         <div className="bg-[#E4E4EB] mx-[16px] w-[280px] h-[1px] mt-[16px] rounded-[10px] "></div>
-        <Checkbox  carmake={make}/>
+        <Checkbox  carmake={allData.makes}/>
 
         
 
         <div>
 
-          <Showmodel  carmodel={model}   />
+          <Showmodel  carmodel={allData.model}   />
 
         </div>
    
@@ -187,7 +234,7 @@ const CarFilter = () => {
         <div className="flex justify-between mx-[16px] mt-[20px]">
           <p className="text-[#8F90A6] text-[12px] font-[600] max-w">Price</p>
           <p className="text-[#28293D] text-[16px] font-[700] max-w">
-              ${priceRange[0]} - ${priceRange[priceRange.length-1]}
+              ${price[0]} - ${price[price.length-1]}
           </p>
         </div>
         <div  className=" mt-[18px] w-[280px] h-[6px] rounded-[10px] mx-[16px]">
@@ -205,13 +252,13 @@ const CarFilter = () => {
             Make year
           </p>
           <p className="text-[#28293D] text-[16px] font-[700] max-w">
-          ${yearRange[0]} - ${yearRange[yearRange.length-1]}  
+          ${year[0]} - ${year[year.length-1]}  
       
           </p>
         </div>
         
         <div  className=" mt-[18px] w-[280px] h-[6px] rounded-[10px] mx-[16px]">
-            <MultiRange setRange={OnYearChange} defaultValue={[2011,2021]} min={1990} max={2021} step={1}  />
+            <MultiRange setRange={OnYearChange} defaultValue={[2000,2010]} min={1990} max={2021} step={1}  />
         </div>
 
         <div className="flex justify-between mx-[16px] mt-[15px]">
@@ -219,21 +266,23 @@ const CarFilter = () => {
                   <p className='font-[500] text-[12px] leading-[16px] text-[#28293D]'>2021</p>
         </div>
         <div className = "mt-[15px]">
-    
-         
+                                                                                                                                                                              
          <section className=' flex flex-col py-[10px] '>
                 <section className=' '>
-                    <DetailDropDown dropDownTitle="Style" title1="BODY STYLE" data1={bodyType} title2="EXTERIOR COLOR"  data2={exteriorColor} target_key={["bodyStyleSelec","extriorSelec","interiorSelec"]} title3="INTERIOR COLOR" data3={interiorColor} />
-                </section>                                               
+                    <DetailDropDown index={1}  dropDownTitle="Style" title1="BODY STYLE"  target_key={["bodystyleData","extcolorData","intcolorData"]} data1={allData.bodyTypes} title2="EXTERIOR COLOR"  data2={allData.extColors} title3="INTERIOR COLOR" data3={allData.intColors} />
+
+                </section>
                  <section className=' '>
-              
-                    <DetailDropDown dropDownTitle="Performance" title1="TRANSMISSION"  data1={transmission}  target_key={["transmissionSelec","driveTrainSelec","fuelTypeSelec"]} title2="DRIVE TRAIN"   data2={ driveTrain} title3="FUEL TYPE"   data3={fuelType} />
+                    <DetailDropDown index={2} dropDownTitle="Performance" title1="TRANSMISSION"   target_key={["transmissionsData","dtrainsData","fuelTypeData"]}  data1={allData.transmissions}   title2="DRIVE TRAIN"   data2={ allData.dtrains} title3="FUEL TYPE"   data3={allData.fuelType} />
+
                 </section>
                 <section className=' '>
-                    <DetailDropDown dropDownTitle="Features" title1={Object.entries(features)[0][0]}  target_key={["InteriorFeature","TenchnologyFeature","SafetyFeature", "ExtriorFeature" ,"others"]} data1={Object.entries(features)[0][1]} title2={Object.entries(features)[1][0]}  data2={Object.entries(features)[1][1]} title3={Object.entries(features)[2][0]}  data3={Object.entries(features)[2][1]}  title4={Object.entries(features)[3][0]}  data4={Object.entries(features)[3][1]} title5={Object.entries(features)[4][0]} data5={Object.entries(features)[4][1]}  />
+                    <DetailDropDown index={3} dropDownTitle="Features" title1={"INTERIOR FEATURES"} target_key={["InteriorFeature","TenchnologyFeature","SafetyFeature", "ExtriorFeature" ,"others"]}   data1={interiorFet} title2={"TECHNOLOGY FEATURES"}  data2={techFet} title3={"SAFETY FEATURES"}  data3={safFet}  title4={"EXTERIOR FEATURES"}  data4={extFet} title5={"OTHERS"} data5={others}  />
+
+
                 </section> 
                 <section className=' '>
-                    <DetailDropDown dropDownTitle="Ratings"  />
+                    <DetailDropDown index={4} dropDownTitle="Ratings"  />
                 </section> 
           </section>
         </div>

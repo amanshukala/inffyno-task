@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 
 const Carcarditem = ({ setShowModal, carData }) => {
 
@@ -14,8 +14,8 @@ const Carcarditem = ({ setShowModal, carData }) => {
     setShowModal(true);
   }, []);
 
-  const dispatch = useDispatch()
-  const { isLoading} = useSelector((state) => state.HomePageSlice)
+  // const dispatch = useDispatch()
+  // const { isLoading} = useSelector((state) => state.HomePageSlice)
 
 
  
@@ -28,7 +28,7 @@ const Carcarditem = ({ setShowModal, carData }) => {
         return (
         
           <div key={car?.vin}  className ="  rounded-[10px] shadow-cardshadow">
-            <Link href={`${car?.vin}`  }>
+            <Link href={`/${car.vin}`  }>
               <a  target="_blank" rel="noreferrer">
             
           

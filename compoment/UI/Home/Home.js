@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React, { useState,useEffect} from "react";
 import Modal from "../Modal/Modal";
 import Carcard from "../CarCard/CarCard";
-import CarFilter from "../CarFilter/CarFilter";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../CarFilter/Pagination";
-const Home = () => {
-  const [showModal, setShowModal] = useState(false);
+import LoaderCarCard from './LoaderCarCard';
+import CarFilter from './../CarFilter/CarFilter';
+const Home = ({carData}) => {
 
-  const dispatch = useDispatch()
-  const {  count } = useSelector((state) => state.HomePageSlice)
+  // const {count ,cars} =carData
+
+  const [showModal, setShowModal] = useState(false);
+  const {cars ,count ,isLoading} = useSelector((state) => state.homePageSlice)
+  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+
+  const [allCars, setAllCars] = useState(carData.cars)
+  const [allCount, setAllCount] = useState(carData.count)
+
+  useEffect(() => {
+      cars.length > 0 ? setAllCars(cars) : "";
+      count ? setAllCount(count) : "" 
+  }, [cars, count])
 
 
 
@@ -25,7 +37,7 @@ const Home = () => {
                     text-[32px] "
             >
         
-              Showing {count} cars
+              Showing {allCount} cars
             </p>
           </div>
           <div>
@@ -40,13 +52,20 @@ const Home = () => {
         <div className="mt-[36px]  flex gap-x-[24px] index-0 ">
           <div>
             
-            <CarFilter />
+            <CarFilter  carData={carData} setAllCars={setAllCars} setAllCount={setAllCount}/>
           </div>
           <div className=" w-[984px] h-max">
         
-            <Carcard setShowModal={setShowModal} />
+           
+            { isLoading ?  array.map((k, index) => {
+                                        return <LoaderCarCard key={index} /> })
 
-            <Pagination />
+                              : allCars.map((cars) => {
+                                return  <Carcard key={cars.car_id} cars={allCars} setShowModal={setShowModal} />
+                            })
+                                }
+
+            <Pagination  count ={allCount} />
             
             <div className="flex  flex-col gap-y-[12px] mt-[40px]">
                 <p className="text-[28px] pl-[69px] text-center font-bold text-[#28293D]">
