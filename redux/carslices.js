@@ -26,7 +26,7 @@ const initialState = {
     year:[1990 , 2022],
     radius:100,
 
-    isAcroll : 0,
+
 
     bodystyleData : [],
     extcolorData : [],
@@ -52,6 +52,8 @@ const initialState = {
 
     const state = getState().homePageSlice; 
     const newArr =[].concat.apply([],[state.InteriorFeature ,state.TenchnologyFeature,state.SafetyFeature,state.ExtriorFeature,state.others])  
+    
+    
     const url = `https://autodigg.com/ad-api/cars/list?${newArr.length >0 ?`&features=${newArr.join(",")}` : ""}${state.extcolorData.length>0 ? `&exterior_color=${state.extcolorData}`: ""}${state.intcolorData.length>0 ? `&interior_color=${state.intcolorData}`: ""}${state.transmissionsData.length>0 ? `&transmission=${state.transmissionsData}`: ""}${state.dtrainsData.length>0 ? `&drivetrain=${state.dtrainsData}`: ""}${state.fuelTypeData.length>0 ? `&fuel_type=${state.fuelTypeData}`: ""}&year_from=${state.year[0]}&year_to=${state.year[1]}&price_from=${state.price[0]}&price_to=${state.price[1]}&radius=${state.radius}&body_type=${state.bodystyleData}&model=${state.modelData}&usedCar=false&car_type=Certified+pre-owned,${state.newUsed.length > 1 ? state.newUsed.join(",") : "Used+car,New+car"}&make=${state.makeCars}&page=${state.page}&radius=${state.radius}&newCar=false`
     console.log(url)
     const countUrl = `https://autodigg.com/ad-api/cars/list?${newArr.length >0 ?`&features=${newArr.join(",")}` : ""}${state.extcolorData.length>0 ? `&exterior_color=${state.extcolorData}`: ""}${state.intcolorData.length>0 ? `&interior_color=${state.intcolorData}`: ""}${state.transmissionsData.length>0 ? `&transmission=${state.transmissionsData}`: ""}${state.dtrainsData.length>0 ? `&drivetrain=${state.dtrainsData}`: ""}${state.fuelTypeData.length>0 ? `&fuel_type=${state.fuelTypeData}`: ""}&year_from=${state.year[0]}&year_to=${state.year[1]}&price_from=${state.price[0]}&price_to=${state.price[1]}&radius=${state.radius}&body_type=${state.bodystyleData}&model=${state.modelData}&usedCar=false&car_type=Certified+pre-owned,${state.newUsed.length > 0 ? state.newUsed.join(",") : "Used+car,New+car"}&make=${state.makeCars}&page=${state.page}&radius=${state.radius}&newCar=false&return=count`
@@ -96,6 +98,8 @@ const initialState = {
 
         
     } catch (error) {
+        throw rejectWithValue(error)
+        
         console.log(error)
     }
 }
@@ -232,192 +236,6 @@ export default homePageSlice.reducer
 
 
 
-
-
-
-
-
-
-
-// import { createSlice ,createAsyncThunk } from "@reduxjs/toolkit";
-// import {HYDRATE} from 'next-redux-wrapper';
-// import axios from "axios";
-// const initialState = {
-//     isLoading: false,
-//     isSuccess: false,
-//     cars: [],
-//     count : 0,
-//     make : null,
-//     model : null,
-//     bodyType : null,
-//     exteriorColor :null,
-//     interiorColor : null,
-//     transmission : null,
-//     driveTrain : null,
-//     fuelType : null,
-//     features : null,
-//     page : "1",
-//     selected_drop : [],
-//     model_drop : [],
-//     priceRange : [0, 1000000],
-//     yearRange : [2011, 2021],
-
-    
-//     bodyStyleSelec : [],
-//     extriorSelec : [],
-//     interiorSelec :[],
-
-//     transmissionSelec :[],
-//     driveTrainSelec :[],
-//     fuelTypeSelec : [],
-
-
-
-//     InteriorFeature :[],
-//     TenchnologyFeature:[],
-//     SafetyFeature :[],
-//     ExtriorFeature :[],
-//     others :[]
-
-    
-
-    
-
-
-
-// }
-
-
-// export const fetchCars = createAsyncThunk('homePage/fetch', async (stt) => {
-
-//     console.log("stt year" ,stt.yearRange.join(","))
-    
-//     const url =`https://autodigg.com/ad-api/cars/list?usedCar=true&model=${stt.model_drop.join()}&car_type=${stt.selected_drop.length > 0 ? stt.selected_drop.join(",")  : stt.extriorSelec.length >0  || stt.interiorSelec.length >0  || stt.bodyStyleSelec.length >0 || stt.transmissionSelec.length >0  ||  stt.driveTrainSelec.length >0  || stt.fuelTypeSelec.length >0 ||  stt.InteriorFeature.lenght >0  || stt.priceRange.lenght >0  || stt.yearRange.lenght >0 ? "": "Used+car,New+car"}&page=${stt.page}&exterior_color=${stt.extriorSelec.join(",")}&interior_color=${stt.interiorSelec.join(",")}&body_type=${stt.bodyStyleSelec.join(",")}&transmission=${stt.transmissionSelec.join(",")}&drivetrain=${stt.driveTrainSelec.join(",")}&fuel_type=${stt.fuelTypeSelec.join(",")}&features=${stt.InteriorFeature.join(",")}&price_from=${stt.priceRange[0]}&price_to=${stt.priceRange[1]}&year_from=${stt.yearRange[0]}&year_to=${stt.yearRange[1]}&radius=100`
-
-//     console.log(url)
-
-//     try {
-//         const response = await axios.get(url);
-//         const count = await axios.get(`${url}&return=count`);
-    
-//         return { cars :response.data, count : count.data.count} 
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
-
-// );
-
-
-
-// const HomePageSlice = createSlice({
-//     name: "homePage",
-//     initialState,
-//     reducers: {
-//         selectedDrop : (state, action)=> {
-//             state.selected_drop = action.payload.selected_drop ? action.payload.selected_drop : state.selected_drop ;
-
-//             state.model_drop = action.payload.model_drop ? action.payload.model_drop : state.model_drop;
-
-//             state.bodyStyleSelec = action.payload.bodyStyleSelec ? action.payload.bodyStyleSelec : state.bodyStyleSelec;
-
-//             state.extriorSelec = action.payload.extriorSelec ? action.payload.extriorSelec : state.extriorSelec;
-
-//             state.interiorSelec = action.payload.interiorSelec ? action.payload.interiorSelec : state.interiorSelec;
-
-
-//             state.transmissionSelec = action.payload.transmissionSelec ? action.payload.transmissionSelec : state.transmissionSelec;
-
-//             state.driveTrainSelec = action.payload.driveTrainSelec ? action.payload.driveTrainSelec : state.driveTrainSelec;
-
-//             state.fuelTypeSelec = action.payload.fuelTypeSelec ? action.payload.fuelTypeSelec : state.fuelTypeSelec;
-
-          
-
-//             state.InteriorFeature = action.payload.InteriorFeature ? action.payload.InteriorFeature : state.InteriorFeature ;
-
-//             state.TenchnologyFeature = action.payload.TenchnologyFeature ? action.payload.TenchnologyFeature : state.TenchnologyFeature;
-
-//             state.SafetyFeature = action.payload.SafetyFeature ? action.payload.SafetyFeature : state.SafetyFeature;
-
-
-//             state.ExtriorFeature = action.payload.ExtriorFeature ? action.payload.ExtriorFeature : state.ExtriorFeature;
-            
-//             state.others = action.payload.others ? action.payload.others : state.others;
-
-//             state.priceRange = action.payload.priceRange ? action.payload.priceRange : state.priceRange;
-
-//             state.yearRange = action.payload.yearRange ? action.payload.yearRange : state.yearRange;
-
-
-
-
-
-
-
-
-
-//          },
-      
-      
-//         // paginatedValue : (state, action)=> {
-//         //     state.page = action.payload
-//         // },
-      
-//         // getCars : (state , action)=>{
-//         //     state.cars = action.payload
-//         // },
-//         // getCount : (state , action)=>{
-//         //     state.count = action.payload
-//         // },
-//         // getMake : (state , action)=>{
-//         //     state.make = action.payload
-//         // },
-//         // getModel : (state , action)=>{
-//         //     state.model = action.payload
-//         // },
-//         // getBodyType : (state , action)=>{
-//         //     state.bodyType = action.payload
-//         // },
-//         // getExteriorColor : (state , action)=>{
-//         //     state.exteriorColor = action.payload
-//         // },
-//         // getInteriorColor : (state , action)=>{
-//         //     state.interiorColor = action.payload
-//         // },
-//         // getTransmission : (state , action)=>{
-//         //     state.transmission = action.payload
-//         // },
-//         // getFuelType : (state , action)=>{
-//         //     state.fuelType = action.payload
-//         // },
-//         // getDriveTrain : (state , action)=>{
-//         //     state.driveTrain = action.payload
-//         // },
-//         // getFeatures : (state , action)=>{
-//         //     state.features = action.payload
-//         // },
-//       },
-//     extraReducers : {
-//         [HYDRATE] : (state , action)=>{
-//             return {...state, ...action.payload.HomePageSlice};
-//         },
-//         [fetchCars.pending] :(state,action)=> {
-//             state.isLoading = true
-//         },
-//         [fetchCars.fulfilled] :(state,action)=> {
-//             state.isLoading = false
-//             state.cars = action.payload.cars
-//             state.count = action.payload.count
-//         },
-//         [fetchCars.rejected] :(state,action)=> {
-//             state.isLoading = false
-//         },
-//     }
-// });
-
-// // export const {  make,getCars,getCount,getBodyType,getDriveTrain,getExteriorColor,getFeatures,getFuelType,getInteriorColor,getMake,getModel,getTransmission ,paginatedValue ,selected_drop  ,selectedDrop ,model_drop  ,bodyStyleSelec , extriorSelec ,interiorSelec ,transmissionSelec ,driveTrainSelec ,fuelTypeSelec ,priceRange ,yearRange } = HomePageSlice.actions
-// export default HomePageSlice.reducer;
 
 
 

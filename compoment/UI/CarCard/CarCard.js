@@ -1,21 +1,8 @@
 import React, {useEffect } from "react";
-
-// import { useDispatch, useSelector } from "react-redux";
-
 import Carcarditem from "./CarcardItem";
 
  
 const Carcard = ({ cars, setShowModal }) => {
-
-  
- 
-  
-  // const dispatch = useDispatch()
-  // const { cars } = useSelector((state) => state.HomePageSlice)
-
- 
-  
-
 
   return (
     

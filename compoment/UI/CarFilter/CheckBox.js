@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 export default function Checkbox ({carmake}) {
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPersons, setSelectedPersons] = useState([]);
   const [dropDown, setDropDown] = useState(false);
@@ -18,6 +19,7 @@ export default function Checkbox ({carmake}) {
   const ref = useRef();
 
   useEffect(() => {
+    
     const handleClickOutside = (event) => {
       if (!ref?.current?.contains(event.target)) {
         setIsOpen(false);

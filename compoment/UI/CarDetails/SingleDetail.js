@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { useRouter } from 'next/router';
+
 import Link from "next/link"
 import { BsArrowLeftCircle } from 'react-icons/bs';
 import { FiSend } from 'react-icons/fi';
@@ -8,8 +10,8 @@ import GallarySlider from './GallarySlider';
 
 const SingleDetail = ({carByVin}) => {
 
-    console.log("carByVin",carByVin)
-    
+    const router = useRouter()
+
   return (
     
     <div>
@@ -19,8 +21,9 @@ const SingleDetail = ({carByVin}) => {
                 <div
                     className=" w-[24px] h-[24px] rounded-[50%]
                 flex justify-center border-[2px] border-[#FF8800]"
+                onClick={()=>router.push("/")}
                 >
-                    <Image src="/aerro.svg" alt="logo" height={13} width={11} />
+                    <Image src="/aerro.svg" alt="logo" height={13} width={11}  />
                 </div>
                     
 

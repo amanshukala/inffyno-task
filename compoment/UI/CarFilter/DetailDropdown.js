@@ -2,50 +2,29 @@ import React,{useState,useRef,useEffect} from 'react'
 import { IoIosArrowDown } from 'react-icons/io';
 import { AiFillStar } from 'react-icons/ai';
 import Checkbox from './CheckBox';
-import {setFiterted ,fetchCars ,setScroll} from "../../../Redux/CarSlices"
+import {setFiterted ,fetchCars } from "../../../Redux/CarSlices"
 import { useDispatch, useSelector } from "react-redux";
 
 const DetailsDropDown = ({dropDownTitle,data1,data2,data3,data4,data5,title1,title2,title3,title4,title5 ,target_key ,index }) => {
+  const [isAcroll ,setIsAcroll] =useState(0)
 
+   const dispatch= useDispatch();
+   const ddd = useSelector((state) => state.homePageSlice);
 
-   const dispatch= useDispatch()
 
   
-    // const ref = useRef();
-
-    // useEffect(() => {
-    //   const handleClickOutside = (event) => {
-    //     if (!ref?.current?.contains(event.target)) {
-    //        if(dropDown) setDropDown(false);
-    //     }
-    //   };
-    //   document.addEventListener("mousedown", handleClickOutside);
-    // }, [dropDown, ref]);
-
-
-  // const dropDownChange = () =>{
-  //   setDropDown(!dropDown)
-  // }
-
   const dropDownChange = () => {
     
-    dispatch(setScroll(ddd.isAcroll === index ? 0 : index));
+    setIsAcroll(isAcroll === index ? 0 : index);
     
   };
-
-  const ddd = useSelector((state) => state.homePageSlice);
-
-  // const { = useSelector((state) => state.HomePageSlice)
-  
 
   const handleChange = (e) => {
 
    
     const { value, checked } = e.target;
 
-    // console.log(value);
-    // console.log("e.target.id",e.target.id);
-
+  
 
     if (checked) {
       dispatch(setFiterted({...ddd, [e.target.id]: [...ddd[e.target.id], value]}))
@@ -74,22 +53,17 @@ const DetailsDropDown = ({dropDownTitle,data1,data2,data3,data4,data5,title1,tit
   }
 
 
-
-
-
-
-
-
-
-
   return (
     <div>
-         <div className="flex flex-col border-t-[1px] border-solid border-[#E4E4EB] " onClick ={dropDownChange}>
-                  <div  className={` ${ddd.isAcroll  === index  ? " block px-[16px] py-[20px] ": "block px-[16px] py-[15px]" }  flex items-center justify-between overflow-hidden  bg-[#f2f2f5]  `} >
+         <div className="flex flex-col border-t-[1px] border-solid border-[#E4E4EB] " >
+                  <div  className={` ${isAcroll  === index  ? " block px-[16px] py-[20px] ": "block px-[16px] py-[15px]" }  
+                                    flex items-center justify-between overflow-hidden  bg-[#f2f2f5]  `} 
+                                    onClick ={dropDownChange} >
+
                     <p className='font-[600] text-[16px] leading-[24px] text-[#28293D]'>{dropDownTitle}</p>
-                    <IoIosArrowDown fill='#28293D' size={14} className= {` ${ddd.isAcroll  === index ?  "rotate-180  ": "rotate-0 " } transition-all ease-in-out duration-100`} />
+                    <IoIosArrowDown fill='#28293D' size={14} className= {` ${isAcroll  === index ?  "rotate-180  ": "rotate-0 " } transition-all ease-in-out duration-100`} />
                   </div>
-                  <div className={` ${ddd.isAcroll  === index  ? " max-h-[1800px] ": "max-h-[0px] hidden " }  overflow-hidden transition-all ease-in-out duration-200 p-[16px] flex flex-col gap-[21px]  `}>
+                  <div className={` ${isAcroll  === index  ? " max-h-[1800px] ": "max-h-[0px] hidden " }  overflow-hidden transition-all ease-in-out duration-200 p-[16px] flex flex-col gap-[21px]  `}>
                   {(dropDownTitle == "Style" || dropDownTitle == "Performance" || dropDownTitle =="Features" ) ? (<div className='flex flex-col gap-[16px]'>
                     <div className='flex flex-col gap-[12px] '>
                         <div className=''>

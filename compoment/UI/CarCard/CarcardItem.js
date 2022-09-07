@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-// import { useDispatch, useSelector } from "react-redux";
 
 const Carcarditem = ({ setShowModal, carData }) => {
 
@@ -14,9 +13,7 @@ const Carcarditem = ({ setShowModal, carData }) => {
     setShowModal(true);
   }, []);
 
-  // const dispatch = useDispatch()
-  // const { isLoading} = useSelector((state) => state.HomePageSlice)
-
+  
 
  
 

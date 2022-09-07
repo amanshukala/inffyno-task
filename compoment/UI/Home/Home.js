@@ -7,10 +7,12 @@ import LoaderCarCard from './LoaderCarCard';
 import CarFilter from './../CarFilter/CarFilter';
 const Home = ({carData}) => {
 
-  // const {count ,cars} =carData
 
   const [showModal, setShowModal] = useState(false);
-  const {cars ,count ,isLoading} = useSelector((state) => state.homePageSlice)
+  const {cars ,count ,isLoading} = useSelector((state) =>({cars : state.homePageSlice.cars ,
+                                                          count  : state.homePageSlice.count ,
+                                                          isLoading : state.homePageSlice.isLoading }) )
+
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
 

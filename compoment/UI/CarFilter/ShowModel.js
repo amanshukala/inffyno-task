@@ -6,22 +6,14 @@ import { setModelType,fetchCars } from "../../../Redux/CarSlices"
 const Showmodel = ({ carmodel }) => {
   const [dropDown, setDropDown] = useState(false);
 
-
-
-
-  
   const dispatch= useDispatch()
 
-  const {modelData}= useSelector((state) => state.homePageSlice);
-  
-
-
+  const {modelData}= useSelector((state) => ({modelData: state.homePageSlice.modelData}));
   
 
   const handleChange = (e) => {
 
-   
-    const { value, checked } = e.target;
+  const { value, checked } = e.target;
 
 
 

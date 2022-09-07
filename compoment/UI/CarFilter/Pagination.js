@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 const Pagination = ({count}) => {
   const dispatch= useDispatch()
 
-  const ddd = useSelector((state) => state.homePageSlice)
 
 
   

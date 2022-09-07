@@ -1,4 +1,5 @@
 import React , {useState ,useEffect} from "react";
+import Image from "next/image"
 
 import {ImCross} from "react-icons/im"
 
@@ -33,7 +34,7 @@ return <><div className="bg-[white] rounded-[10px] flex  mt-[178px] mb-[342px] m
 
     </div>
     <div className ="mt-[36px] h-[172px]">
-      <img src="https://autodigg.com/loginModal.webp" width={137} height ={172}  className="absolute
+      <Image src="https://autodigg.com/loginModal.webp" alt="" width={137} height ={172}  className="absolute
        left-0 bottom-0"/>
     </div>
 
@@ -49,14 +50,15 @@ return <><div className="bg-[white] rounded-[10px] flex  mt-[178px] mb-[342px] m
     <div className ="flex gap-x-[33px] mt-[35px]">
       <div className ="py-[24px] px-[20px] border-[1px] border-solid rounded-[8px]
         item-center flex flex-col">
-          <div className ="flex justify-center">  <img src= "https://autodigg.com/_next/image?url=%2Ffacebook.webp&w=64&q=75"  width={64} height={64}/></div>
+          <div className ="flex justify-center">  
+          <Image src= "https://autodigg.com/_next/image?url=%2Ffacebook.webp&w=64&q=75" alt="" width={64} height={64}/></div>
           <p className ="whitespace-pre">LOGIN VIA FACEBOOK</p>
 
         </div>
       <div className ="py-[24px] px-[20px] border-[1px] border-solid rounded-[8px]
         item-center flex flex-col">
           <div className ="flex justify-center">
-          <img src= "https://autodigg.com/_next/image?url=%2Ftwitter.webp&w=64&q=75"  width={64} height={64}/>
+          <Image src= "https://autodigg.com/_next/image?url=%2Ftwitter.webp&w=64&q=75" alt="" width={64} height={64}/>
 
           </div>
             <p className ="whitespace-pre">LOGIN VIA TWITTER</p>
@@ -65,7 +67,7 @@ return <><div className="bg-[white] rounded-[10px] flex  mt-[178px] mb-[342px] m
       <div className ="py-[24px] px-[20px] border-[1px] border-solid rounded-[8px]
         item-center flex flex-col">
           <div className ="flex justify-center">
-          <img src= "https://autodigg.com/_next/image?url=%2Fgoogle.webp&w=64&q=75"  width={64} height={64}/>
+          <Image src= "https://autodigg.com/_next/image?url=%2Fgoogle.webp&w=64&q=75" alt="" width={64} height={64}/>
 
           </div>
             <p className ="whitespace-pre">LOGIN VIA GOOGLE</p>
